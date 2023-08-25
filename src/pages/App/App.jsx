@@ -2,9 +2,10 @@ import { useState } from "react";
 import { getUser } from "../../utilities/users-service";
 import AuthPage from "../AuthPage/AuthPage";
 import TeacherIndexPage from "../TeacherIndexPage/TeaherIndexPage";
+import NotebookPage from "../NotebookPage/NotebookPage";
+import CreateTeacherPage from "../CreateTeacherPage/CreateTeacherPage";
 import NavBar from "../../components/NavBar/NavBar";
 import Sidebar from "../../components/SideBar/SideBar";
-import NotebookPage from "../NotebookPage/NotebookPage";
 
 import { Routes, Route } from "react-router-dom";
 
@@ -23,6 +24,7 @@ export default function App() {
             <Routes>
               <Route path="/" element={<TeacherIndexPage />} />
               <Route path="/notebook" element={<NotebookPage />} />
+              <Route path="/teacher/create" element={<CreateTeacherPage />} />
             </Routes>
           </div>
         </>

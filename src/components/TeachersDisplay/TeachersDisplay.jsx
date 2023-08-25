@@ -12,7 +12,7 @@ export default function TeachersDisplay ( {teachers} ) {
                 <img src={teacher.image} className="w-40" alt="teacher" />
             </div>
             <h3 className="mt-2 text-lg font-semibold text-center">{teacher.name}</h3>
-            <h4 className="m-2 text-md font-semibold text-center">{teacher.description}</h4>
+            <h4 className="m-2 text-md font-semibold text-center">{teacher.subject.name}</h4>
 
         </div>
         ))}

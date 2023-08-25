@@ -16,7 +16,7 @@ export default function SideBar() {
     {
       name: "Create",
       icon: <FaPlus className="text-3xl" />,
-      link: "/",
+      link: "/teacher/create",
     },
     {
       name: "Settings",
