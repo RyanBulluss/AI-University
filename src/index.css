@@ -15,5 +15,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.scrollbar::-webkit-scrollbar {
+  width: 1px;
+  height: 12px;
+  padding: 1px;
+  border-radius: 8px;
+  border: solid #474B4F 1px;
+}
 
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #474B4F;
+  border-radius: 8px;
+}
 

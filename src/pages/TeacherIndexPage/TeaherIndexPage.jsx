@@ -1,14 +1,27 @@
+import { useState, useEffect } from "react";
+import { getAllSubjects } from "../../utilities/subject-api";
+import { getAllTeachers } from "../../utilities/teacher-api";
+import SubjectsDisplay from "../../components/SubjectsDisplay/SubjectsDisplay";
+import TeachersDisplay from "../../components/TeachersDisplay/TeachersDisplay";
+
+
 export default function TeacherIndexPage() {
-  const subjects = [
-    "Engineering",
-    "Philosophy",
-    "Psychology",
-    "Computer Science",
-    "Engineering",
-    "Philosophy",
-    "Psychology",
-    "Computer Science",
-  ];
+  const [subjects, setSubjects] = useState([])
+  const [teachers, setTeachers] = useState([])
+
+  useEffect(() => {
+    async function allData() {
+      const dbSubjects = await getAllSubjects();
+      const dbTeachers = await getAllTeachers();
+      setSubjects(dbSubjects)
+      setTeachers(dbTeachers)
+      
+    }
+    
+
+
+    allData();
+  }, [])
 
   return (
     <div className="w-full">
@@ -19,16 +32,8 @@ export default function TeacherIndexPage() {
           className="bg-fourth w-full p-2 rounded-lg"
         />
       </form>
-      <div className="flex my-3 gap-3 overflow-hidden">
-        {subjects.map((subject, idx) => (
-          <div
-            key={idx}
-            className="p-2 bg-fourth rounded-lg flex items-center justify-center text-center"
-          >
-            {subject}
-          </div>
-        ))}
-      </div>
+      <SubjectsDisplay subjects={subjects} />
+      <TeachersDisplay teachers={teachers} />
     </div>
   );
 }

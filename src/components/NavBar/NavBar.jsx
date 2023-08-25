@@ -31,7 +31,7 @@ export default function NavBar({ user, setUser }) {
           Log Out
         </Link>
         <div className="h-8 w-8 overflow-hidden rounded-full border border-black ">
-          <img src={user.image} alt="profile picture" />
+          <img src={user.image} alt="profile" />
         </div>
       </div>
     </nav>

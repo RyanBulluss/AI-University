@@ -33,8 +33,9 @@ export default function SideBar() {
             <Link
               className="text-muted-foreground text-xs group flex py-3 
           w-full justify-start font-medium cursor-poiner 
-          hover:bg-fifth rounded-lg transition"
+          hover:bg-fifth/30 rounded-lg transition"
               to={route.link}
+              key={idx}
             >
               <div
                 key={idx}
