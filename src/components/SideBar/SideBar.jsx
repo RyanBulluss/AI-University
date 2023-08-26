@@ -21,7 +21,7 @@ export default function SideBar() {
     {
       name: "Settings",
       icon: <FaCog className="text-3xl" />,
-      link: "/",
+      link: "/settings",
     },
   ];
 

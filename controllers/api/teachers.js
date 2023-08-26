@@ -9,6 +9,7 @@ module.exports = {
 }
 
 async function create(req, res) {
+    console.log(req.body)
     try {
         const teacher = await Teacher.create(req.body);
         res.json(teacher);

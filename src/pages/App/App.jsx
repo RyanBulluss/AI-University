@@ -8,6 +8,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import Sidebar from "../../components/SideBar/SideBar";
 
 import { Routes, Route } from "react-router-dom";
+import UserSettingsForm from "../../components/UserSettingsForm/UserSettingsForm";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
@@ -25,6 +26,7 @@ export default function App() {
               <Route path="/" element={<TeacherIndexPage />} />
               <Route path="/notebook" element={<NotebookPage />} />
               <Route path="/teacher/create" element={<CreateTeacherPage />} />
+              <Route path="/settings" element={<UserSettingsForm />} />
             </Routes>
           </div>
         </>
