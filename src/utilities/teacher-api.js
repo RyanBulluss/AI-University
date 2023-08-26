@@ -8,3 +8,7 @@ export async function getAllTeachers() {
 export async function createTeacher(formData) {
   return sendRequest(BASE_URL, 'POST', formData);
 }
+
+export async function getOneTeacher(id) {
+  return sendRequest(`${BASE_URL}/${id}`);
+}

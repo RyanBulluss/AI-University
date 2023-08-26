@@ -3,6 +3,9 @@ const router = express.Router();
 const usersCtrl = require('../../controllers/api/users');
 const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
+
+
+// All routes start with /api/users/
 router.get('/', ensureLoggedIn, usersCtrl.getAll);
 
 router.post('/', usersCtrl.create);

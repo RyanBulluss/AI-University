@@ -3,6 +3,9 @@ const router = express.Router();
 const subjectsCtrl = require('../../controllers/api/subjects');
 const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
+
+
+// All routes start with /api/students/
 router.post('/', subjectsCtrl.create);
 
 router.get('/', subjectsCtrl.getAll);

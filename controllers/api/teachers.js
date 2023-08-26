@@ -37,6 +37,7 @@ async function update(req, res) {
 }
 
 async function getOne(req, res) {
+    console.log(req.params.id)
     try {
         const teacher = await Teacher.findById( {_id: req.params.id} );
         res.json(teacher);

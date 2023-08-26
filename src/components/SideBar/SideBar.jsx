@@ -30,6 +30,7 @@ export default function SideBar() {
     },
   ];
 
+
   return (
     <div className="space-y-4 flex flex-col h-full bg-third">
       <div className="p-1 flex-1 justify-center">

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 export default function TeachersDisplay({
   teachers,
@@ -20,18 +21,23 @@ export default function TeachersDisplay({
   }, [subjectFilter, teachers]);
 
   useEffect(() => {
-    if (searchFilter.length < 1) return;
-    const newTeachers = teachers.filter((teacher) => {
-      if (teacher.name.toLowerCase().includes(searchFilter.toLowerCase()))
-        return teacher;
-    });
+    let newTeachers;
+    if (searchFilter.length < 1) {
+      newTeachers = teachers;
+    } else {
+      newTeachers = teachers.filter((teacher) => {
+        if (teacher.name.toLowerCase().includes(searchFilter.toLowerCase()))
+          return teacher;
+      });
+    }
     setFilteredTeachers(newTeachers);
   }, [searchFilter]);
 
   return (
     <div className="flex flex-wrap gap-3 mt-5">
       {filteredTeachers.map((teacher, idx) => (
-        <div
+        <Link
+          to={`/chat/${teacher._id}`}
           key={idx}
           className="bg-fourth w-[200px] flex flex-col justify-center items-center p-5 rounded-2xl "
         >
@@ -44,7 +50,7 @@ export default function TeachersDisplay({
           <h4 className="m-2 text-md font-semibold text-center">
             {teacher.subject.name}
           </h4>
-        </div>
+        </Link>
       ))}
     </div>
   );
