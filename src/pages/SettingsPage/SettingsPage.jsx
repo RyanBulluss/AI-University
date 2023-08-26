@@ -1,10 +1,10 @@
 import UserSettingsForm from "../../components/UserSettingsForm/UserSettingsForm";
 
-export default function SettingsPage() {
+export default function SettingsPage( {setUser} ) {
     return (
-      <div>
-        <h1 className="text-4xl font-bold">Settings Page</h1>
-        <UserSettingsForm />
+      <div className="">
+        <h1 className="text-4xl my-10 font-bold">Settings Page</h1>
+        <UserSettingsForm setUser={setUser} />
       </div>
     );
 }

@@ -12,3 +12,11 @@ export async function login(userData) {
 export async function checkToken() {
   return sendRequest(`${BASE_URL}/check-token`);
 }
+
+export async function updateUserImage(newUrl) {
+  return sendRequest(`${BASE_URL}/image`, 'PUT', newUrl);
+}
+
+export async function getAllStudents() {
+  return sendRequest(BASE_URL);
+}

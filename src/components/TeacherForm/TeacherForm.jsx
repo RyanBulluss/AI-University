@@ -33,7 +33,7 @@ export default function TeacherForm({ subjects }) {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="rounded-2xl overflow-hidden w-40 mt-20">
+      <div className="rounded-2xl overflow-hidden w-40 mt-5">
         <img
           src={
             displayImage ||
@@ -64,7 +64,7 @@ export default function TeacherForm({ subjects }) {
                 <span>Image</span>
                 <button onClick={showImage}
                 className="bg-first hover:bg-first/80
-                rounded-full px-2 border border-fifth">Test Image</button>
+                rounded-md px-2 border border-fifth">Test Image</button>
               </label>
               <input
                 onChange={(e) => handleChange(e, 'image')}

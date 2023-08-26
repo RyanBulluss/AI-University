@@ -1,12 +1,17 @@
 import { Link } from "react-router-dom";
-import { FaHome, FaBook, FaPlus, FaCog } from "react-icons/fa";
+import { FaRobot , FaUserGraduate, FaBook, FaPlus, FaCog } from "react-icons/fa";
 
 export default function SideBar() {
   const routes = [
     {
-      name: "Home",
-      icon: <FaHome className="text-3xl" />,
+      name: "Teachers",
+      icon: <FaRobot  className="text-3xl" />,
       link: "/",
+    },
+    {
+      name: "Students",
+      icon: <FaUserGraduate className="text-3xl" />,
+      link: "/students",
     },
     {
       name: "Notes",

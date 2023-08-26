@@ -5,9 +5,30 @@ const bcrypt = require('bcrypt');
 module.exports = {
     create,
     login,
-    checkToken
+    checkToken,
+    updateImage,
+    getAll
 };
 
+
+async function updateImage(req, res) {
+    try {
+        await User.updateOne({ _id: req.user._id }, { image: req.body.imageUrl });
+        const user = await User.findOne({ _id: req.user._id });
+        res.json(user);
+    } catch {
+        res.status(400).json('Bad Image');
+    }
+}
+
+async function getAll(req, res) {
+    try {
+        const users = await User.find({});
+        res.json(users);
+    } catch {
+        res.status(400).json('Bad Request');
+    }
+}
 
 async function login(req, res) {
 

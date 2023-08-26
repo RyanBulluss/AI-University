@@ -29,7 +29,7 @@ export default function TeachersDisplay({
   }, [searchFilter]);
 
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-3 mt-5">
       {filteredTeachers.map((teacher, idx) => (
         <div
           key={idx}

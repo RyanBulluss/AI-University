@@ -8,25 +8,27 @@ import NavBar from "../../components/NavBar/NavBar";
 import Sidebar from "../../components/SideBar/SideBar";
 
 import { Routes, Route } from "react-router-dom";
-import UserSettingsForm from "../../components/UserSettingsForm/UserSettingsForm";
+import SettingsPage from "../SettingsPage/SettingsPage";
+import StudentIndexPage from "../StudentIndexPage/StudentIndexPage";
 
 export default function App() {
   const [user, setUser] = useState(getUser());
 
   return (
-    <main className="">
+    <main>
       {user ? (
         <>
           <NavBar user={user} setUser={setUser} />
           <div className="hidden md:flex mt-16 w-20  flex-col fixed inset-y-0">
             <Sidebar />
           </div>
-          <div className="ml-4 md:ml-24 mt-20 mb-4 mr-4">
+          <div className="ml-8 md:ml-28 mt-24 mb-8 mr-8">
             <Routes>
               <Route path="/" element={<TeacherIndexPage />} />
+              <Route path="/students" element={<StudentIndexPage />} />
               <Route path="/notebook" element={<NotebookPage />} />
               <Route path="/teacher/create" element={<CreateTeacherPage />} />
-              <Route path="/settings" element={<UserSettingsForm />} />
+              <Route path="/settings" element={<SettingsPage setUser={setUser} />} />
             </Routes>
           </div>
         </>
