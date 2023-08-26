@@ -1,6 +1,6 @@
 import { getAllSubjects } from "../../utilities/subject-api";
 import { useEffect, useState } from "react";
-import TeacherForm from "../../components/TeacherForm/TeacherForm";
+import TeacherForm from "../../components/TeacherForm/TeacherForm"
 
 export default function CreateTeacherPage() {
   const [subjects, setSubjects] = useState([]);

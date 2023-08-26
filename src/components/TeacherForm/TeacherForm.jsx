@@ -1,29 +1,36 @@
 import { useState } from "react";
 import { createTeacher } from "../../utilities/teacher-api";
+import { useNavigate  } from "react-router-dom";
 
 export default function TeacherForm({ subjects }) {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: '', image: '', description: '',
-    subject: '', instructions: '', seed: ''
+    name: "",
+    image: "",
+    description: "",
+    subject: subjects[0]._id,
+    instructions: "",
+    seed: "",
   });
-  const [render, setRender] = useState(true)
-  const [displayImage, setDisplayImage] = useState('')
+
+  console.log(formData)
+  const [displayImage, setDisplayImage] = useState("");
 
   async function handleSubmit(e) {
     e.preventDefault();
     try {
       const teacher = await createTeacher(formData);
-      console.log(teacher)
+      console.log(teacher);
+      navigate('/')
     } catch {
       console.log("Teacher Creation Failed - Try Again");
-    }    
+    }
   }
 
   function handleChange(e, input) {
     const newData = formData;
     newData[input] = e.target.value;
     setFormData(newData);
-    setRender(!render);
   }
 
   function showImage(e) {
@@ -46,14 +53,13 @@ export default function TeacherForm({ subjects }) {
         <h1 className="text-xl font-bold text-white capitalize dark:text-white">
           Teacher Details
         </h1>
-        <form>
+        <form onSubmit={(e) => handleSubmit(e)}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
-              <label className="text-white dark:text-gray-200">
-                Name
-              </label>
+              <label className="text-white dark:text-gray-200">Name</label>
               <input
-                onChange={(e) => handleChange(e, 'name')}
+                required
+                onChange={(e) => handleChange(e, "name")}
                 value={formData.name}
                 type="text"
                 className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
@@ -62,12 +68,17 @@ export default function TeacherForm({ subjects }) {
             <div>
               <label className="text-white dark:text-gray-200 flex justify-between">
                 <span>Image</span>
-                <button onClick={showImage}
-                className="bg-first hover:bg-first/80
-                rounded-md px-2 border border-fifth">Test Image</button>
+                <button
+                  onClick={showImage}
+                  className="bg-first hover:bg-first/80
+                rounded-md px-2 border border-fifth"
+                >
+                  Test Image
+                </button>
               </label>
               <input
-                onChange={(e) => handleChange(e, 'image')}
+                required
+                onChange={(e) => handleChange(e, "image")}
                 value={formData.image}
                 type="text"
                 className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
@@ -78,19 +89,19 @@ export default function TeacherForm({ subjects }) {
                 Description
               </label>
               <input
-                onChange={(e) => handleChange(e, 'description')}
+                required
+                onChange={(e) => handleChange(e, "description")}
                 value={formData.description}
                 type="text"
                 className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
               />
             </div>
             <div>
-              <label
-                className="text-white dark:text-gray-200"
+              <label className="text-white dark:text-gray-200">Subject</label>
+              <select
+                onChange={(e) => handleChange(e, "subject")}
+                className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
               >
-                Subject
-              </label>
-              <select onChange={(e) => handleChange(e, 'subject')} className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring">
                 {subjects.map((subject, idx) => (
                   <option className="border" key={idx} value={subject._id}>
                     {subject.name}
@@ -99,27 +110,23 @@ export default function TeacherForm({ subjects }) {
               </select>
             </div>
             <div>
-              <label
-                className="text-white dark:text-gray-200"
-              >
+              <label className="text-white dark:text-gray-200">
                 Instructions
               </label>
               <textarea
-                onChange={(e) => handleChange(e, 'instructions')}
+                required
+                onChange={(e) => handleChange(e, "instructions")}
                 value={formData.instructions}
                 type="textarea"
                 className="w-full px-4 h-40 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
               ></textarea>
             </div>
             <div>
-              <label
-                className="text-white dark:text-gray-200"
-              >
-                Seed
-              </label>
+              <label className="text-white dark:text-gray-200">Seed</label>
               <textarea
+                required
                 value={formData.seed}
-                onChange={(e) => handleChange(e, 'seed')}
+                onChange={(e) => handleChange(e, "seed")}
                 type="textarea"
                 className="w-full px-4 h-40 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
               ></textarea>
@@ -127,8 +134,10 @@ export default function TeacherForm({ subjects }) {
           </div>
 
           <div className="flex justify-end mt-6">
-            <button onClick={handleSubmit}
-            className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-first rounded-md hover:bg-second focus:outline-none focus:bg-first/30">
+            <button
+              type="submit"
+              className="px-6 py-2 leading-5 text-white transition-colors duration-200 transform bg-first rounded-md hover:bg-second focus:outline-none focus:bg-first/30"
+            >
               Save
             </button>
           </div>
