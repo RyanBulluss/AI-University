@@ -27,7 +27,7 @@ export default function TeachersDisplay({ students, searchFilter, user }) {
         <Link
           to={`/student/chat/${student._id}`}
           key={idx}
-          className={`bg-${student._id === user._id ? 'fifth' : 'fourth'} w-[200px] flex flex-col justify-center items-center p-5 rounded-2xl `}
+          className={`bg-fourth w-[200px] flex flex-col justify-center items-center p-5 rounded-2xl `}
         >
           <div className="rounded-2xl overflow-hidden w-40">
             <img src={student.image} className="w-40" alt="student" />

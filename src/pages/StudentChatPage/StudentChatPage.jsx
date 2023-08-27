@@ -3,11 +3,20 @@ import { getOneStudent } from "../../utilities/users-api";
 import { useParams, Link } from "react-router-dom";
 import ChatTop from "../../components/ChatTop/ChatTop";
 import ChatBottom from "../../components/ChatBottom/ChatBottom";
+import { sendMessage } from "../../utilities/userChat-api";
 
 export default function StudentChatPage( {user} ) {
   const [student, setStudent] = useState({ name: "" });
+  const [newMessage, setNewMessage] = useState('')
 
   const studentId = useParams();
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    sendMessage({text: newMessage, senderId: user._id, receiverId: studentId.id});
+
+    setNewMessage('')
+  }
 
   useEffect(() => {
     async function getStudent() {
@@ -24,7 +33,7 @@ export default function StudentChatPage( {user} ) {
       <div className="flex-grow mx-4">
 
       </div>
-      <ChatBottom />
+      <ChatBottom newMessage={newMessage} setNewMessage={setNewMessage} handleSubmit={handleSubmit} />
     </div>
   );
 }
