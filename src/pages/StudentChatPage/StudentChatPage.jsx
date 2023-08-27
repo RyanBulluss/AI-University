@@ -8,13 +8,15 @@ import { sendMessage } from "../../utilities/userChat-api";
 export default function StudentChatPage( {user} ) {
   const [student, setStudent] = useState({ name: "" });
   const [newMessage, setNewMessage] = useState('')
+  const [messages, setMessages] = useState([]);
 
   const studentId = useParams();
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    sendMessage({text: newMessage, senderId: user._id, receiverId: studentId.id});
-
+    const chat = await sendMessage({text: newMessage, senderId: user._id, receiverId: studentId.id});
+    console.log(chat);
+    setMessages(chat.logs)
     setNewMessage('')
   }
 
@@ -31,7 +33,9 @@ export default function StudentChatPage( {user} ) {
     <div className="h-[100vh] mx-auto max-w-4xl w-full flex flex-col">
       <ChatTop recipient={student} user={user} />
       <div className="flex-grow mx-4">
-
+      {messages.map((mes, idx) => (
+        <h3 className="text-4xl">{mes.text}</h3>
+      ))}
       </div>
       <ChatBottom newMessage={newMessage} setNewMessage={setNewMessage} handleSubmit={handleSubmit} />
     </div>
