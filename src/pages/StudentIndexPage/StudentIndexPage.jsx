@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { getAllStudents } from "../../utilities/users-api";
 import StudentsDisplay from "../../components/StudentsDisplay/StudentsDisplay"
 
-export default function StudentIndexPage() {
+export default function StudentIndexPage( {user} ) {
   const [students, setStudents] = useState([])
   const [searchFilter, setSearchFilter] = useState('');
   const [search, setSearch] = useState('');
@@ -32,7 +32,7 @@ export default function StudentIndexPage() {
           className="bg-fourth w-full p-2 rounded-lg"
         />
       </form>
-      <StudentsDisplay students={students} searchFilter={searchFilter} />
+      <StudentsDisplay students={students} searchFilter={searchFilter} user={user} />
     </div>
   );
 }

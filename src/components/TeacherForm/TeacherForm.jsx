@@ -8,12 +8,11 @@ export default function TeacherForm({ subjects }) {
     name: "",
     image: "",
     description: "",
-    subject: subjects[0]._id,
+    subject: "64e8b5010e10f7b2db764f16",
     instructions: "",
     seed: "",
   });
 
-  console.log(formData)
   const [displayImage, setDisplayImage] = useState("");
 
   async function handleSubmit(e) {
@@ -27,10 +26,8 @@ export default function TeacherForm({ subjects }) {
     }
   }
 
-  function handleChange(e, input) {
-    const newData = formData;
-    newData[input] = e.target.value;
-    setFormData(newData);
+  function handleChange(e) {
+    setFormData({...formData, [e.target.name]: e.target.value });
   }
 
   function showImage(e) {
@@ -59,6 +56,7 @@ export default function TeacherForm({ subjects }) {
               <label className="text-white dark:text-gray-200">Name</label>
               <input
                 required
+                name="name"
                 onChange={(e) => handleChange(e, "name")}
                 value={formData.name}
                 type="text"
@@ -78,6 +76,7 @@ export default function TeacherForm({ subjects }) {
               </label>
               <input
                 required
+                name="image"
                 onChange={(e) => handleChange(e, "image")}
                 value={formData.image}
                 type="text"
@@ -90,6 +89,7 @@ export default function TeacherForm({ subjects }) {
               </label>
               <input
                 required
+                name="description"
                 onChange={(e) => handleChange(e, "description")}
                 value={formData.description}
                 type="text"
@@ -115,6 +115,7 @@ export default function TeacherForm({ subjects }) {
               </label>
               <textarea
                 required
+                name="instructions"
                 onChange={(e) => handleChange(e, "instructions")}
                 value={formData.instructions}
                 type="textarea"
@@ -125,6 +126,7 @@ export default function TeacherForm({ subjects }) {
               <label className="text-white dark:text-gray-200">Seed</label>
               <textarea
                 required
+                name="seed"
                 value={formData.seed}
                 onChange={(e) => handleChange(e, "seed")}
                 type="textarea"

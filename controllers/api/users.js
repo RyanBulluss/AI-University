@@ -7,7 +7,8 @@ module.exports = {
     login,
     checkToken,
     updateImage,
-    getAll
+    getAll,
+    getOne
 };
 
 
@@ -27,6 +28,16 @@ async function getAll(req, res) {
         res.json(users);
     } catch {
         res.status(400).json('Bad Request');
+    }
+}
+
+async function getOne(req, res) {
+    console.log(req.params.id)
+    try {
+        const user = await User.findById( {_id: req.params.id} );
+        res.json(user);
+    } catch (err) {
+        res.status(400).json(err);
     }
 }
 

@@ -8,8 +8,7 @@ import TeachersDisplay from "../../components/TeachersDisplay/TeachersDisplay";
 export default function TeacherIndexPage() {
   const [subjects, setSubjects] = useState([])
   const [teachers, setTeachers] = useState([])
-  const [subjectFilter, setSubjectFilter] = useState('all');
-  const [searchFilter, setSearchFilter] = useState('');
+  const [filter, setFilter] = useState({type: 'subject', filter: ''});
   const [search, setSearch] = useState('');
 
   useEffect(() => {
@@ -24,7 +23,7 @@ export default function TeacherIndexPage() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setSearchFilter(search)
+    setFilter({type: 'search', filter: search})
     setSearch('')
   }
 
@@ -39,8 +38,8 @@ export default function TeacherIndexPage() {
           className="bg-fourth w-full p-2 rounded-lg"
         />
       </form>
-      <SubjectsDisplay subjects={subjects} setSubjectFilter={setSubjectFilter} />
-      <TeachersDisplay teachers={teachers} subjectFilter={subjectFilter} searchFilter={searchFilter} />
+      <SubjectsDisplay subjects={subjects} setFilter={setFilter} />
+      <TeachersDisplay teachers={teachers} filter={filter} />
     </div>
   );
 }

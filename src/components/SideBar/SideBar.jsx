@@ -37,7 +37,7 @@ export default function SideBar() {
         <div className="space-y-2">
           {routes.map((route, idx) => (
             <Link
-              className="text-muted-foreground text-xs group flex py-3 
+              className="text-xs text-gray-300 hover:text-white group flex py-3 
           w-full justify-start font-medium cursor-poiner 
           hover:bg-fifth/30 rounded-lg transition"
               to={route.link}

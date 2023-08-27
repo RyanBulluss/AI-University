@@ -3,41 +3,34 @@ import { Link } from "react-router-dom";
 
 export default function TeachersDisplay({
   teachers,
-  subjectFilter,
-  searchFilter,
+  filter,
 }) {
   const [filteredTeachers, setFilteredTeachers] = useState([]);
 
 
   useEffect(() => {
-    if (subjectFilter !== "all") {
-      const newTeachers = teachers.filter(
-        (teacher) => teacher.subject.name === subjectFilter
-      );
-      setFilteredTeachers(newTeachers);
-    } else {
-      setFilteredTeachers(teachers);
-    }
-  }, [subjectFilter, teachers]);
-
-  useEffect(() => {
     let newTeachers;
-    if (searchFilter.length < 1) {
+    if (filter.filter === "") {
       newTeachers = teachers;
+    } else if (filter.type === 'subject') {
+      newTeachers = teachers.filter(
+        (teacher) => teacher.subject.name === filter.filter
+      );
     } else {
       newTeachers = teachers.filter((teacher) => {
-        if (teacher.name.toLowerCase().includes(searchFilter.toLowerCase()))
+        if (teacher.name.toLowerCase().includes(filter.filter.toLowerCase()))
           return teacher;
       });
     }
     setFilteredTeachers(newTeachers);
-  }, [searchFilter]);
+  }, [filter, teachers]);
+
 
   return (
     <div className="flex flex-wrap gap-3 mt-5">
       {filteredTeachers.map((teacher, idx) => (
         <Link
-          to={`/chat/${teacher._id}`}
+          to={`/teacher/chat/${teacher._id}`}
           key={idx}
           className="bg-fourth w-[200px] flex flex-col justify-center items-center p-5 rounded-2xl "
         >
@@ -47,7 +40,7 @@ export default function TeachersDisplay({
           <h3 className="mt-2 text-lg font-semibold text-center">
             {teacher.name}
           </h3>
-          <h4 className="m-2 text-md font-semibold text-center">
+          <h4 className="m-2 text-md text-gray-300 font-semibold text-center">
             {teacher.subject.name}
           </h4>
         </Link>

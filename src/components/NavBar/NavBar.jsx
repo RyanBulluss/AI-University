@@ -10,13 +10,13 @@ export default function NavBar({ user, setUser }) {
 
   return (
     <nav
-      className="w-full z-50 flex justify-between items-center py-2 px-4 border-b
+      className="w-full z-50 flex justify-between items-center px-2 border-b
       border-fifth/10 bg-third h-16 fixed inset-y-0"
     >
       <div className="flex items-center">
         <FaBars className="block md:hidden w-8 h-8 cursor-pointer hover:bg-fifth rounded" />
         <Link
-          className="hidden md:block text-3xl font-bold hover:bg-fifth p-1 rounded-xl"
+          className="hidden hover:bg-fifth/30 md:block text-3xl font-bold py-2 px-4 rounded-xl"
           to="/"
         >
           AI University
@@ -24,13 +24,13 @@ export default function NavBar({ user, setUser }) {
       </div>
       <div className="flex items-center gap-x-3">
         <Link
-          className="hover:bg-fifth p-1 rounded-xl"
+          className="hover:bg-fifth/30 py-2 px-4 rounded-xl"
           to=""
           onClick={handleLogOut}
         >
           Log Out
         </Link>
-        <div className="h-8 w-8 overflow-hidden rounded-full border border-black ">
+        <div className="h-10 w-10 overflow-hidden rounded-full border border-black ">
           <img src={user.image} alt="profile" />
         </div>
       </div>

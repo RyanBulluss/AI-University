@@ -20,3 +20,7 @@ export async function updateUserImage(newUrl) {
 export async function getAllStudents() {
   return sendRequest(BASE_URL);
 }
+
+export async function getOneStudent(id) {
+  return sendRequest(`${BASE_URL}/${id}`);
+}
