@@ -30,3 +30,6 @@ html, body {
   border-radius: 8px;
 }
 
+.chat-scrollbar::-webkit-scrollbar {
+  width: 0px;
+}

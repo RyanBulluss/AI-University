@@ -3,7 +3,7 @@ import { FiChevronLeft, FiMoreVertical, FiSend  } from "react-icons/fi";
 
 export default function ChatTop( {recipient, user} ) {
   return (
-    <div className="h-28 flex items-center mx-4 border-b border-fourth shadow-md">
+    <div className="h-28 fixed w-full max-w-4xl bg-third flex items-center border-b border-fourth shadow-md">
       <Link className="text-4xl m-4" to={recipient.description ? '/' : '/students'}>
         <FiChevronLeft />
       </Link>

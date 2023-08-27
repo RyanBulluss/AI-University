@@ -4,7 +4,7 @@ export default function ChatBottom( {newMessage, setNewMessage, handleSubmit} ) 
 
 
   return (
-    <form onSubmit={handleSubmit} className="h-28 border-t mx-4 border-fourth flex items-center">
+    <form onSubmit={handleSubmit} className="h-28 fixed bottom-0 w-full max-w-4xl bg-third border-t border-fourth flex items-center">
       <input
         className="text-xl p-3 ml-6 w-full bg-fourth rounded-lg flex-grow"
         type="text"

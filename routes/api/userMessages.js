@@ -6,6 +6,8 @@ const ensureLoggedIn = require('../../config/ensureLoggedIn');
 
 
 // All routes start with /api/user/chats
+router.get('/:senderId/:receiverId', userChatsCtrl.getMessages);
+
 router.post('/', userChatsCtrl.sendMessage);
 
 module.exports = router;
