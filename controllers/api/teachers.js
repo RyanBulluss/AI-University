@@ -39,7 +39,7 @@ async function update(req, res) {
 async function getOne(req, res) {
     console.log(req.params.id)
     try {
-        const teacher = await Teacher.findById( {_id: req.params.id} );
+        const teacher = await Teacher.findById( {_id: req.params.id} ).populate('subject');
         res.json(teacher);
     } catch (err) {
         res.status(400).json(err);

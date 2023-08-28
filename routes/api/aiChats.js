@@ -10,6 +10,8 @@ router.get('/:userId/:teacherId', aiChatsCtrl.getMessages);
 
 router.post('/', aiChatsCtrl.sendMessage);
 
+router.post('/ai', aiChatsCtrl.sendAnswer);
+
+
+
 module.exports = router;
-
-

@@ -6,5 +6,9 @@ export async function sendQuestion(chatInfo) {
 }
 
 export async function getMessages(ids) {
-  return sendRequest(`${BASE_URL}/${ids.senderId}/${ids.receiverId}`);
+  return sendRequest(`${BASE_URL}/${ids.student}/${ids.teacher}`);
+}
+
+export async function sendAnswer(info) {
+  return sendRequest(`${BASE_URL}/ai`, 'POST', info);
 }

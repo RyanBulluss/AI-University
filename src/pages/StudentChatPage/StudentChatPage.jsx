@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import ChatTop from "../../components/ChatTop/ChatTop";
 import ChatBottom from "../../components/ChatBottom/ChatBottom";
 import { sendMessage, getMessages } from "../../utilities/userChat-api";
-import { format } from "date-fns";
+import ChatBody from "../../components/ChatBody/ChatBody";
 
 export default function StudentChatPage({ user }) {
   const [student, setStudent] = useState({ name: "" });
@@ -12,16 +12,6 @@ export default function StudentChatPage({ user }) {
   const [messages, setMessages] = useState([]);
 
   const studentId = useParams();
-
-  const chatContainerRef = useRef(null);
-
-  useEffect(() => {
-    // Scroll to the bottom whenever new messages are added
-    chatContainerRef.current.scrollTo({
-      top: chatContainerRef.current.scrollHeight,
-      behavior: 'smooth'
-    });
-  }, [messages]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -60,36 +50,8 @@ export default function StudentChatPage({ user }) {
   return (
     <div className="h-[100vh] mx-auto max-w-4xl w-full flex flex-col">
       <ChatTop recipient={student} user={user} />
-      <div className="flex-grow mx-4 overflow-y-auto chat-scrollbar my-28" ref={chatContainerRef}>
-        {messages.map((message, idx) =>
-          message.sender === user._id ? (
-            <div className="flex items-center justify-end">
-              <h4>{format(new Date(message.createdAt), "h:mm a")}</h4>
-              <h3 className="bg-blue-400 w-3/5 rounded-l-2xl rounded-t-2xl p-3 m-3 text-2xl">
-                {message.text}
-              </h3>
-              <div className="h-14 w-14 overflow-hidden rounded-full">
-                <img src={user.image} alt="profile" />
-              </div>
-            </div>
-          ) : (
-            <div className="flex items-center justify-start">
-              <div className="h-14 w-14 overflow-hidden rounded-full">
-                <img src={student.image} alt="profile" />
-              </div>
-              <h3 className="bg-second/60 w-3/5 rounded-r-2xl rounded-t-2xl p-3 m-3 text-2xl">
-                {message.text}
-              </h3>
-              <h4>{format(new Date(message.createdAt), "h:mm a")}</h4>
-            </div>
-          )
-        )}
-      </div>
-      <ChatBottom
-        newMessage={newMessage}
-        setNewMessage={setNewMessage}
-        handleSubmit={handleSubmit}
-      />
+      <ChatBody user={user} messages={messages} recipient={student} />
+      <ChatBottom newMessage={newMessage} setNewMessage={setNewMessage} handleSubmit={handleSubmit} />
     </div>
   );
 }

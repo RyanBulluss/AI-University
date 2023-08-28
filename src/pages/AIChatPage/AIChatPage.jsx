@@ -3,10 +3,14 @@ import { getOneTeacher } from "../../utilities/teacher-api";
 import { useParams } from "react-router-dom";
 import ChatTop from "../../components/ChatTop/ChatTop";
 import ChatBottom from "../../components/ChatBottom/ChatBottom";
-import { sendQuestion } from "../../utilities/aiChat-api";
+import chatTime from "../../utilities/chat-time";
+import {
+  sendQuestion,
+  getMessages,
+  sendAnswer,
+} from "../../utilities/aiChat-api";
 
-
-export default function AIChatPage( {user} ) {
+export default function AIChatPage({ user }) {
   const [teacher, setTeacher] = useState({ name: "" });
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -19,25 +23,28 @@ export default function AIChatPage( {user} ) {
     // Scroll to the bottom whenever new messages are added
     chatContainerRef.current.scrollTo({
       top: chatContainerRef.current.scrollHeight,
-      behavior: 'smooth'
+      behavior: "smooth",
     });
   }, [messages]);
 
   async function handleSubmit(e) {
     e.preventDefault();
-    console.log('hello')
 
     const chat = await sendQuestion({
       text: newMessage,
-      userId: user._id, 
-      teacherId: teacherId.id
-    })
-    console.log(chat)
-    setMessages(chat.logs)
+      userId: user._id,
+      teacherId: teacherId.id,
+    });
+    setMessages(chat.logs);
 
-    setNewMessage('');
+    const fullChat = await sendAnswer({
+      user: user,
+      teacher: teacher,
+      message: newMessage,
+    });
+    setMessages(fullChat.logs);
+    setNewMessage("");
   }
-
 
   useEffect(() => {
     async function getTeacher() {
@@ -48,11 +55,50 @@ export default function AIChatPage( {user} ) {
     getTeacher();
   }, [teacherId]);
 
+  useEffect(() => {
+    async function getStudent() {
+      const chat = await getMessages({
+        student: user._id,
+        teacher: teacherId.id,
+      });
+      if (!chat) return;
+      setMessages(chat.logs);
+      console.log(chat);
+    }
+
+    getStudent();
+  }, [user._id, teacherId.id]);
+
   return (
     <div className="h-[100vh] mx-auto max-w-4xl w-full flex flex-col">
       <ChatTop recipient={teacher} user={user} />
-      <div className="flex-grow mx-4 overflow-y-auto chat-scrollbar my-28" ref={chatContainerRef}>
-       
+      <div
+        className="flex-grow mx-4 overflow-y-auto chat-scrollbar my-28"
+        ref={chatContainerRef}
+      >
+        {messages.map((message, idx) =>
+          message.messageType === "user" ? (
+            <div key={idx} className="flex items-center justify-end">
+              <h4>{chatTime(message.message.createdAt)}</h4>
+              <h3 className="bg-blue-400 w-3/5 rounded-l-2xl rounded-t-2xl p-3 m-4 text-lg md:text-xl lg:text-2xl">
+                {message.message.text}
+              </h3>
+              <div className="h-14 w-14 overflow-hidden rounded-full">
+                <img src={user.image} alt="profile" />
+              </div>
+            </div>
+          ) : (
+            <div key={idx} className="flex items-center justify-start">
+              <div className="h-14 w-14 overflow-hidden rounded-full">
+                <img src={teacher.image} alt="profile" />
+              </div>
+              <h3 className="bg-second/60 w-3/5 rounded-r-2xl rounded-t-2xl p-3 m-4 text-lg md:text-xl lg:text-2xl">
+                {message.message.text} <br /> 
+              </h3>
+              <h4>{chatTime(message.message.createdAt)}</h4>
+            </div>
+          )
+        )}
       </div>
       <ChatBottom
         newMessage={newMessage}
