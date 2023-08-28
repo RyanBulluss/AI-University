@@ -46,7 +46,7 @@ export default function StudentChatPage({ user }) {
     }
 
     getStudent();
-  }, []);
+  }, [user._id, studentId.id]);
 
   useEffect(() => {
     async function getStudent() {
@@ -77,7 +77,7 @@ export default function StudentChatPage({ user }) {
               <div className="h-14 w-14 overflow-hidden rounded-full">
                 <img src={student.image} alt="profile" />
               </div>
-              <h3 className="bg-gray-400 w-3/5 rounded-r-2xl rounded-t-2xl p-3 m-3 text-2xl">
+              <h3 className="bg-second/60 w-3/5 rounded-r-2xl rounded-t-2xl p-3 m-3 text-2xl">
                 {message.text}
               </h3>
               <h4>{format(new Date(message.createdAt), "h:mm a")}</h4>

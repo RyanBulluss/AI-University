@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FiChevronLeft, FiMoreVertical, FiSend  } from "react-icons/fi";
+import { FiChevronLeft, FiMoreVertical  } from "react-icons/fi";
 
 export default function ChatTop( {recipient, user} ) {
   return (
