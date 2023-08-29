@@ -7,8 +7,8 @@ async function createNotebook(req, res) {
     // req.body = { userId: user._id, title: 'my notes', icon: '📘' }
     // notes = [], (favorite = false);
     try {
-        const { userId, title, icon } = req.body;
-        const notebook = await Notebook.create({ user: userId, title: title, icon: icon, notes: [] })
+        const { title, icon } = req.body;
+        const notebook = await Notebook.create({ user: req.user._id, title: title, icon: icon, notes: [] })
         res.json(notebook);
     } catch (e) {
         res.status(400).json(err);
@@ -16,8 +16,9 @@ async function createNotebook(req, res) {
 }
 
 async function getBooksByUser(req, res) {
+    console.log(req.params.id)
     try {
-        const notebooks = await Notebook.find({ user: req.params.id })
+        const notebooks = await Notebook.find({ user: req.params.id }).populate('notes')
         res.json(notebooks);
     } catch (e) {
         res.status(400).json(err);

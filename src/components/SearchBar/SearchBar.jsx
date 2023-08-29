@@ -9,7 +9,7 @@ export default function SearchBar( { handleSubmit, search, setSearch } ) {
           value={search}
           type="search"
           placeholder="Search..."
-          className="bg-fourth w-full p-2 rounded-lg"
+          className="bg-fourth w-full p-2 rounded-lg border border-fifth"
         />
     </form>
     )
