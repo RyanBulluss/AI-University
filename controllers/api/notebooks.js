@@ -36,6 +36,8 @@ async function getBooksById(req, res) {
 
 async function deleteBookById(req, res) {
     try {
+        const notebook = await Notebook.findById(req.params.id).populate('notes');
+        await Note.deleteMany({ _id: { $in: notebook.notes } })
         const result = await Notebook.deleteOne({ _id: req.params.id })
         res.json(result);
     } catch (e) {

@@ -8,3 +8,8 @@ export async function getUserNotebooks(userId) {
 export async function createNotebook(input) {
   return sendRequest(BASE_URL, 'POST', input);
 }
+
+export async function deleteNotebook(id) {
+  return sendRequest(`${BASE_URL}/${id}`, 'POST');
+}
+
