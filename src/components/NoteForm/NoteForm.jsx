@@ -63,7 +63,7 @@ export default function NoteForm({ setForm, subjects, notebookId, user, setNoteb
         className="px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white"
       >
         {subjects.map((subject, idx) => (
-          <option value={subject._id}>{subject.name}</option>
+          <option key={idx} value={subject._id}>{subject.name}</option>
         ))}
       </select>
       <SubmitButton buttonText={"Create Note"} />

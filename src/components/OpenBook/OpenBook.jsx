@@ -35,7 +35,7 @@ export default function OpenBook({ user, book, setSelectedId, subjects, notebook
       {form && <NoteForm setForm={setForm} setNotebooks={setNotebooks} book={book} subjects={subjects} notebookId={book._id} user={user} />}
       {book.notes.length < 1 && <h1 className="text-center text-2xl p-5">Notebook empty!</h1>}
       {book.notes.map((note, idx) => (
-        <NoteView note={note} key={idx} page={idx + 1} />
+        <NoteView user={user} setNotebooks={setNotebooks} book={book} note={note} key={idx} page={idx + 1} />
       ))}
     </div>
   );
