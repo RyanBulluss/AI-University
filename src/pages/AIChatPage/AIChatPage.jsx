@@ -29,9 +29,11 @@ export default function AIChatPage({ user }) {
 
   async function handleSubmit(e) {
     e.preventDefault();
-
+    const message = newMessage;
+    setNewMessage("");
+    
     const chat = await sendQuestion({
-      text: newMessage,
+      text: message,
       userId: user._id,
       teacherId: teacherId.id,
     });
@@ -40,10 +42,9 @@ export default function AIChatPage({ user }) {
     const fullChat = await sendAnswer({
       user: user,
       teacher: teacher,
-      message: newMessage,
+      message: message,
     });
     setMessages(fullChat.logs);
-    setNewMessage("");
   }
 
   useEffect(() => {

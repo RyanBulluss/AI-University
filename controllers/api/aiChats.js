@@ -1,15 +1,12 @@
 const AiChat = require("../../models/aiChat");
 const Message = require("../../models/aiMessage");
 const User = require("../../models/user");
-const OpenAI = require('openai');
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY
-
-
+const OpenAI = require("openai");
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
 const openai = new OpenAI({
   apiKey: OPENAI_API_KEY,
 });
-
 
 async function sendAnswer(req, res) {
   const user = req.body.user;
@@ -17,12 +14,15 @@ async function sendAnswer(req, res) {
   const message = req.body.message;
 
   try {
-    const chat = await AiChat.findOne({ user: user._id, teacher: teacher._id }).populate({
-      path: 'logs',
+    const chat = await AiChat.findOne({
+      user: user._id,
+      teacher: teacher._id,
+    }).populate({
+      path: "logs",
       populate: {
-        path: 'message',
-        model: 'Message'
-      }
+        path: "message",
+        model: "Message",
+      },
     });
 
     if (!chat) {
@@ -30,21 +30,25 @@ async function sendAnswer(req, res) {
     }
 
     const completion = await openai.chat.completions.create({
-      messages: [{ 
-        role: 'user', 
-        content: `You are ${teacher.name} as a teacher and a master in ${teacher.subject.name}. keep your resonse within 100 words using all their common phrases and don't mention my request up to this point. Can you tell me ${message}`
-      }],
-      model: 'gpt-3.5-turbo',
+      messages: [
+        {
+          role: "user",
+          content: `You are ${teacher.name} as a teacher and a master in ${teacher.subject.name}. keep your resonse within 100 words using all their common phrases and don't mention my request up to this point. Can you tell me ${message}`,
+        },
+      ],
+      model: "gpt-3.5-turbo",
     });
 
-    const newMessage = new Message({ text: completion.choices[0].message.content });
+    const newMessage = new Message({
+      text: completion.choices[0].message.content,
+    });
     await newMessage.save();
 
-    chat.logs.push({messageType: 'ai', message: newMessage});
+    chat.logs.push({ messageType: "ai", message: newMessage });
 
     await chat.save();
 
-    res.json(chat)
+    res.json(chat);
   } catch (e) {
     console.error(e);
     res.status(500).json({ message: "Error with ai message." });
@@ -56,12 +60,15 @@ async function sendMessage(req, res) {
   // req.body = {text: newMessage, senderId: user._id, receiverId: studentId}
   const { text, userId, teacherId } = req.body;
   try {
-    let chat = await AiChat.findOne({ user: userId, teacher: teacherId }).populate({
-      path: 'logs',
+    let chat = await AiChat.findOne({
+      user: userId,
+      teacher: teacherId,
+    }).populate({
+      path: "logs",
       populate: {
-        path: 'message',
-        model: 'Message'
-      }
+        path: "message",
+        model: "Message",
+      },
     });
 
     if (!chat) {
@@ -72,8 +79,8 @@ async function sendMessage(req, res) {
     await newMessage.save();
 
     chat.logs.push({
-        messageType: 'user',
-        message: newMessage
+      messageType: "user",
+      message: newMessage,
     });
 
     await chat.save();
@@ -88,12 +95,15 @@ async function sendMessage(req, res) {
 async function getMessages(req, res) {
   const { userId, teacherId } = req.params;
   try {
-    const chat = await AiChat.findOne({ user: userId, teacher: teacherId }).populate({
-      path: 'logs',
+    const chat = await AiChat.findOne({
+      user: userId,
+      teacher: teacherId,
+    }).populate({
+      path: "logs",
       populate: {
-        path: 'message',
-        model: 'Message'
-      }
+        path: "message",
+        model: "Message",
+      },
     });
     res.json(chat);
   } catch (e) {
@@ -105,5 +115,5 @@ async function getMessages(req, res) {
 module.exports = {
   sendMessage,
   getMessages,
-  sendAnswer
+  sendAnswer,
 };

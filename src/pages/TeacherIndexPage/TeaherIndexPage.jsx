@@ -3,11 +3,12 @@ import { getAllSubjects } from "../../utilities/subject-api";
 import { getAllTeachers } from "../../utilities/teacher-api";
 import SubjectsDisplay from "../../components/SubjectsDisplay/SubjectsDisplay";
 import TeachersDisplay from "../../components/TeachersDisplay/TeachersDisplay";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 
 export default function TeacherIndexPage() {
-  const [subjects, setSubjects] = useState([])
   const [teachers, setTeachers] = useState([])
+  const [subjects, setSubjects] = useState([])
   const [filter, setFilter] = useState({type: 'subject', filter: ''});
   const [search, setSearch] = useState('');
 
@@ -29,15 +30,7 @@ export default function TeacherIndexPage() {
 
   return (
     <div className="w-full">
-      <form onSubmit={handleSubmit}>
-        <input
-          onChange={(e) => setSearch(e.target.value)}
-          value={search}
-          type="search"
-          placeholder="Search..."
-          className="bg-fourth w-full p-2 rounded-lg"
-        />
-      </form>
+      <SearchBar handleSubmit={handleSubmit} search={search} setSearch={setSearch}  />
       <SubjectsDisplay subjects={subjects} setFilter={setFilter} />
       <TeachersDisplay teachers={teachers} filter={filter} />
     </div>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { getAllStudents } from "../../utilities/users-api";
 import StudentsDisplay from "../../components/StudentsDisplay/StudentsDisplay"
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 export default function StudentIndexPage( {user} ) {
   const [students, setStudents] = useState([])
@@ -23,15 +24,7 @@ export default function StudentIndexPage( {user} ) {
 
   return (
     <div className="w-full">
-      <form onSubmit={handleSubmit}>
-        <input
-          onChange={(e) => setSearch(e.target.value)}
-          value={search}
-          type="search"
-          placeholder="Search..."
-          className="bg-fourth w-full p-2 rounded-lg"
-        />
-      </form>
+      <SearchBar handleSubmit={handleSubmit} search={search} setSearch={setSearch} />
       <StudentsDisplay students={students} searchFilter={searchFilter} user={user} />
     </div>
   );
