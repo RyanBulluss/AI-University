@@ -23,6 +23,10 @@ const userSchema = new Schema({
     premium: {
         type: Boolean,
         default: false
+    },
+    level: {
+        type: String,
+        default: 'High School'
     }
 }, {
     timestamps: true,

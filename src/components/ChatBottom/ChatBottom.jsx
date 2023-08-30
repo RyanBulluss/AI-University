@@ -34,7 +34,7 @@ export default function ChatBottom({
     console.log(newNote);
     const res = await createNote(newNote);
     setSuccess(!!res);
-    setTimeout(() => setSuccess(false), 1000);
+    setTimeout(() => setSuccess(false), 2000);
   }
 
   function handleChange(e) {

@@ -52,7 +52,7 @@ export default function NotebookForm( {setNotebooks, notebooks, form, setForm}) 
         value={icon}
         onChange={(e) => setIcon(e.target.value)}>
           {icons.map((icon, idx) => (
-            <option value={icon}>{icon}</option>
+            <option key={idx} value={icon}>{icon}</option>
           ))}
         </select>
       </div>

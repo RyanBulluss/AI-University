@@ -16,7 +16,8 @@ router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);
 
 router.put('/image', ensureLoggedIn, usersCtrl.updateImage);
 
-router.get('/:id', ensureLoggedIn, usersCtrl.getOne);
+router.put('/level', ensureLoggedIn, usersCtrl.updateLevel);
 
+router.get('/:id', ensureLoggedIn, usersCtrl.getOne);
 
 module.exports = router;

@@ -27,7 +27,7 @@ export default function TeachersDisplay({
 
 
   return (
-    <div className="flex flex-wrap gap-3 mt-5">
+    <div className="flex flex-wrap gap-3 mt-3">
       {filteredTeachers.map((teacher, idx) => (
         <Link
           to={`/teacher/chat/${teacher._id}`}

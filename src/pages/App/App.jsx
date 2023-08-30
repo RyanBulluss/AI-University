@@ -41,7 +41,7 @@ export default function App() {
               <Route path="/students" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><StudentIndexPage user={user} /></div>} />
               <Route path="/notebook" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><NotebookPage user={user} /></div>} />
               <Route path="/teacher/create" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><CreateTeacherPage /></div>} />
-              <Route path="/settings" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><SettingsPage setUser={setUser} /> </div>} />
+              <Route path="/settings" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><SettingsPage user={user} setUser={setUser} /> </div>} />
               <Route path="/teacher/chat/:id" element={<AIChatPage user={user} />} />
               <Route path="/student/chat/:id" element={<StudentChatPage user={user} />} />
             </Routes>

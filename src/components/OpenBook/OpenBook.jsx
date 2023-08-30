@@ -1,7 +1,7 @@
 import NoteView from "../NoteView/NoteView";
 import { useState } from "react";
 import { FiChevronLeft } from "react-icons/fi";
-import { FaPlus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
 import NoteForm from "../NoteForm/NoteForm";
 import { deleteNotebook } from "../../utilities/notebook-api";
 import { getUserNotebooks } from "../../utilities/notebook-api";
@@ -28,7 +28,8 @@ export default function OpenBook({ user, book, setSelectedId, subjects, notebook
           {book.title} {book.icon}
         </h1>
         <div className="text-3xl m-4 flex gap-2 cursor-pointer">
-          <FaPlus onClick={() => setForm(!form)} />
+          {form && <FaMinus onClick={() => setForm(!form)} />}
+          {!form && <FaPlus onClick={() => setForm(!form)} />}
           <FaTrash onClick={deleteBook} />
         </div>
       </div>

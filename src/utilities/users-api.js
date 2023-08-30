@@ -17,6 +17,10 @@ export async function updateUserImage(newUrl) {
   return sendRequest(`${BASE_URL}/image`, 'PUT', newUrl);
 }
 
+export async function updateLevel(newLevel) {
+  return sendRequest(`${BASE_URL}/level`, 'PUT', newLevel);
+}
+
 export async function getAllStudents() {
   return sendRequest(BASE_URL);
 }
@@ -24,3 +28,5 @@ export async function getAllStudents() {
 export async function getOneStudent(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
+
+

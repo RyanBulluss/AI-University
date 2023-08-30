@@ -36,7 +36,7 @@ export default function NotebookPage({ user }) {
   }
 
   return (
-    <div>
+    <div className="max-w-7xl">
       <SearchBar
         handleSubmit={handleSubmit}
         search={search}
@@ -44,7 +44,14 @@ export default function NotebookPage({ user }) {
       />
       {selectedId ? (
         <div className="my-5">
-          <OpenBook user={user} notebooks={notebooks} setNotebooks={setNotebooks} setSelectedId={setSelectedId} subjects={subjects} book={notebooks.find(book => book._id === selectedId)} />
+          <OpenBook
+            user={user}
+            notebooks={notebooks}
+            setNotebooks={setNotebooks}
+            setSelectedId={setSelectedId}
+            subjects={subjects}
+            book={notebooks.find((book) => book._id === selectedId)}
+          />
         </div>
       ) : (
         <NotebookDisplay

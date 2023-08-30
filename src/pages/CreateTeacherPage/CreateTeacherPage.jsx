@@ -27,6 +27,9 @@ export default function CreateTeacherPage() {
 
 
   return (
-    <TeacherForm subjects={subjects} formData={formData} setFormData={setFormData} />
+    <div className="max-w-7xl mx-auto">
+      <TeacherForm subjects={subjects} formData={formData} setFormData={setFormData} />
+
+    </div>
   );
 }

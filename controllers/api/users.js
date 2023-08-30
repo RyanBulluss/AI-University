@@ -8,7 +8,8 @@ module.exports = {
     checkToken,
     updateImage,
     getAll,
-    getOne
+    getOne,
+    updateLevel
 };
 
 
@@ -16,9 +17,22 @@ async function updateImage(req, res) {
     try {
         await User.updateOne({ _id: req.user._id }, { image: req.body.imageUrl });
         const user = await User.findOne({ _id: req.user._id });
+        console.log(req.body.imageUrl)
         res.json(user);
     } catch {
         res.status(400).json('Bad Image');
+    }
+}
+
+async function updateLevel(req, res) {
+
+    try {
+        await User.updateOne({ _id: req.user._id }, { level: req.body.level });
+        const user = await User.findOne({ _id: req.user._id });
+        console.log(req.body.level)
+        res.json(user);
+    } catch {
+        res.status(400).json('Bad Request');
     }
 }
 
