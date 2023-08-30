@@ -4,6 +4,14 @@ import TeacherForm from "../../components/TeacherForm/TeacherForm"
 
 export default function CreateTeacherPage() {
   const [subjects, setSubjects] = useState([]);
+  const [formData, setFormData] = useState({
+    name: "",
+    image: "",
+    description: "",
+    subject: "",
+    instructions: "",
+    seed: "",
+  });
 
 
 
@@ -11,6 +19,7 @@ export default function CreateTeacherPage() {
     async function allData() {
       const dbSubjects = await getAllSubjects();
       setSubjects(dbSubjects);
+      setFormData({...formData, subject: dbSubjects[0]._id})
     }
 
     allData();
@@ -18,6 +27,6 @@ export default function CreateTeacherPage() {
 
 
   return (
-    <TeacherForm subjects={subjects} />
+    <TeacherForm subjects={subjects} formData={formData} setFormData={setFormData} />
   );
 }

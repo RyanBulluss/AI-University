@@ -1,7 +1,7 @@
 import chatTime from "../../utilities/chat-time";
 import { useRef, useEffect } from "react";
 
-export default function ChatBody( {messages, user, recipient} ) {
+export default function ChatBody( {messages, user, recipient, showForm} ) {
 
 
     const chatContainerRef = useRef(null);
@@ -12,10 +12,10 @@ export default function ChatBody( {messages, user, recipient} ) {
         top: chatContainerRef.current.scrollHeight,
         behavior: 'smooth'
       });
-    }, [messages]);
+    }, [messages, showForm]);
 
   return (
-    <div className="flex-grow mx-4 overflow-y-auto chat-scrollbar my-28" ref={chatContainerRef}>
+    <div className={`flex-grow mx-4 overflow-y-auto chat-scrollbar ${showForm ? 'mt-28 mb-64' : 'my-28'} `} ref={chatContainerRef}>
         {messages.map((message, idx) =>
           message.sender === user._id ? (
             <div key={idx} className="flex items-center justify-end">

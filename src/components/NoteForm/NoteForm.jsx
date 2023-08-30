@@ -8,7 +8,6 @@ export default function NoteForm({ setForm, subjects, notebookId, user, setNoteb
     notebookId: notebookId,
     title: "",
     text: "",
-    subjectId: subjects[0]._id,
     credit: user.name,
   });
 
@@ -55,17 +54,6 @@ export default function NoteForm({ setForm, subjects, notebookId, user, setNoteb
         type="textarea"
         className="px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white"
       />
-      <label className="text-white mt-3 dark:text-gray-200">Subject</label>
-      <select
-        onChange={handleChange}
-        value={noteForm.subjectId}
-        name="subjectId"
-        className="px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white"
-      >
-        {subjects.map((subject, idx) => (
-          <option key={idx} value={subject._id}>{subject.name}</option>
-        ))}
-      </select>
       <SubmitButton buttonText={"Create Note"} />
     </form>
   );

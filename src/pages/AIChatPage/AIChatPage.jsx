@@ -14,6 +14,7 @@ export default function AIChatPage({ user }) {
   const [teacher, setTeacher] = useState({ name: "" });
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   const teacherId = useParams();
 
@@ -31,7 +32,7 @@ export default function AIChatPage({ user }) {
     e.preventDefault();
     const message = newMessage;
     setNewMessage("");
-    
+
     const chat = await sendQuestion({
       text: message,
       userId: user._id,
@@ -64,7 +65,6 @@ export default function AIChatPage({ user }) {
       });
       if (!chat) return;
       setMessages(chat.logs);
-      console.log(chat);
     }
 
     getStudent();
@@ -94,7 +94,7 @@ export default function AIChatPage({ user }) {
                 <img src={teacher.image} alt="profile" />
               </div>
               <h3 className="bg-second/60 w-3/5 rounded-r-2xl rounded-t-2xl p-3 m-4 text-lg md:text-xl lg:text-2xl">
-                {message.message.text} <br /> 
+                {message.message.text} <br />
               </h3>
               <h4>{chatTime(message.message.createdAt)}</h4>
             </div>
@@ -102,6 +102,10 @@ export default function AIChatPage({ user }) {
         )}
       </div>
       <ChatBottom
+        setShowForm={setShowForm}
+        showForm={showForm}
+        teacher={teacher}
+        user={user}
         newMessage={newMessage}
         setNewMessage={setNewMessage}
         handleSubmit={handleSubmit}

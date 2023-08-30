@@ -10,6 +10,7 @@ export default function StudentChatPage({ user }) {
   const [student, setStudent] = useState({ name: "" });
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [showForm, setShowForm] = useState(false);
 
   const studentId = useParams();
 
@@ -50,8 +51,21 @@ export default function StudentChatPage({ user }) {
   return (
     <div className="h-[100vh] mx-auto max-w-4xl w-full flex flex-col">
       <ChatTop recipient={student} user={user} />
-      <ChatBody user={user} messages={messages} recipient={student} />
-      <ChatBottom newMessage={newMessage} setNewMessage={setNewMessage} handleSubmit={handleSubmit} />
+      <ChatBody
+        showForm={showForm}
+        user={user}
+        messages={messages}
+        recipient={student}
+      />
+      <ChatBottom
+        teacher={student}
+        user={user}
+        showForm={showForm}
+        setShowForm={setShowForm}
+        newMessage={newMessage}
+        setNewMessage={setNewMessage}
+        handleSubmit={handleSubmit}
+      />
     </div>
   );
 }

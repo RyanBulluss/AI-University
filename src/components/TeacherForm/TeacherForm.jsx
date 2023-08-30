@@ -1,17 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createTeacher } from "../../utilities/teacher-api";
-import { useNavigate  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function TeacherForm({ subjects }) {
+export default function TeacherForm({ subjects, formData, setFormData }) {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    name: "",
-    image: "",
-    description: "",
-    subject: "64e8b5010e10f7b2db764f16",
-    instructions: "",
-    seed: "",
-  });
+  
 
   const [displayImage, setDisplayImage] = useState("");
 
@@ -20,14 +13,16 @@ export default function TeacherForm({ subjects }) {
     try {
       const teacher = await createTeacher(formData);
       console.log(teacher);
-      navigate('/')
+      navigate("/");
     } catch {
       console.log("Teacher Creation Failed - Try Again");
     }
   }
 
-  function handleChange(e) {
-    setFormData({...formData, [e.target.name]: e.target.value });
+  async function handleChange(e) {
+    console.log(e.target.name)
+    setFormData({ ...formData, [e.target.name]: e.target.value }, () => console.log(formData));
+    console.log(formData);
   }
 
   function showImage(e) {
@@ -57,7 +52,7 @@ export default function TeacherForm({ subjects }) {
               <input
                 required
                 name="name"
-                onChange={(e) => handleChange(e, "name")}
+                onChange={(e) => handleChange(e)}
                 value={formData.name}
                 type="text"
                 className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
@@ -90,7 +85,7 @@ export default function TeacherForm({ subjects }) {
               <input
                 required
                 name="description"
-                onChange={(e) => handleChange(e, "description")}
+                onChange={(e) => handleChange(e)}
                 value={formData.description}
                 type="text"
                 className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
@@ -99,11 +94,12 @@ export default function TeacherForm({ subjects }) {
             <div>
               <label className="text-white dark:text-gray-200">Subject</label>
               <select
-                onChange={(e) => handleChange(e, "subject")}
+                name="subject"
+                onChange={(e) => handleChange(e)}
                 className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
               >
                 {subjects.map((subject, idx) => (
-                  <option className="border" key={idx} value={subject._id}>
+                  <option key={idx} value={subject._id}>
                     {subject.name}
                   </option>
                 ))}
@@ -116,7 +112,7 @@ export default function TeacherForm({ subjects }) {
               <textarea
                 required
                 name="instructions"
-                onChange={(e) => handleChange(e, "instructions")}
+                onChange={(e) => handleChange(e)}
                 value={formData.instructions}
                 type="textarea"
                 className="w-full px-4 h-40 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
@@ -128,7 +124,7 @@ export default function TeacherForm({ subjects }) {
                 required
                 name="seed"
                 value={formData.seed}
-                onChange={(e) => handleChange(e, "seed")}
+                onChange={(e) => handleChange(e)}
                 type="textarea"
                 className="w-full px-4 h-40 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
               ></textarea>

@@ -5,10 +5,10 @@ const note = require("../../models/note");
 
 async function createNote(req, res) {
     // req = { notebookId , title, text, subjectId, credit: 'name' }
-    const { notebookId, title, text, subjectId, credit } = req.body;
+    const { notebookId, title, text, credit } = req.body;
     try {
         let notebook = await Notebook.findById(notebookId).populate('notes');
-        const note = await Note.create({ title: title, text: text, subject: subjectId, credit: credit });
+        const note = await Note.create({ title: title, text: text, credit: credit });
         notebook.notes.push(note);
         await notebook.save();
 
