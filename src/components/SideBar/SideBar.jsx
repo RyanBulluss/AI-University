@@ -46,6 +46,7 @@ export default function SideBar() {
               <div
                 key={idx}
                 className="flex flex-col text-base gap-y-2 items-center flex-1"
+                style={{ userSelect: 'none' }}
               >
                 {route.icon}
                 {route.name}

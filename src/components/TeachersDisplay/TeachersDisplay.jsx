@@ -25,7 +25,6 @@ export default function TeachersDisplay({
     setFilteredTeachers(newTeachers);
   }, [filter, teachers]);
 
-
   return (
     <div className="flex flex-wrap gap-3 mt-3">
       {filteredTeachers.map((teacher, idx) => (

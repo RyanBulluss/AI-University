@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { FaBars } from 'react-icons/fa';
 import * as usersService from "../../utilities/users-service";
+import MobileSideBar from "../MobileSideBar/MobileSideBar";
 
 export default function NavBar({ user, setUser }) {
   function handleLogOut() {
@@ -12,9 +12,10 @@ export default function NavBar({ user, setUser }) {
     <nav
       className="w-full z-50 flex justify-between items-center px-2 border-b
       border-fifth/10 bg-third h-16 fixed inset-y-0"
+      style={{ userSelect: 'none' }}
     >
       <div className="flex items-center">
-        <FaBars className="block md:hidden w-8 h-8 cursor-pointer hover:bg-fifth rounded" />
+        <MobileSideBar />
         <Link
           className="hidden hover:bg-fifth/30 md:block text-3xl font-bold py-2 px-4 rounded-xl"
           to="/"

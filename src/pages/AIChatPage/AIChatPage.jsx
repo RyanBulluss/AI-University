@@ -15,6 +15,7 @@ export default function AIChatPage({ user }) {
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [showForm, setShowForm] = useState(false);
+  const [typing, setTyping] = useState(false);
 
   const teacherId = useParams();
 
@@ -26,7 +27,7 @@ export default function AIChatPage({ user }) {
       top: chatContainerRef.current.scrollHeight,
       behavior: "smooth",
     });
-  }, [messages]);
+  }, [messages, showForm]);
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -39,6 +40,7 @@ export default function AIChatPage({ user }) {
       teacherId: teacherId.id,
     });
     setMessages(chat.logs);
+    setTimeout(() => setTyping(true), 750);
 
     const fullChat = await sendAnswer({
       user: user,
@@ -46,6 +48,7 @@ export default function AIChatPage({ user }) {
       message: message,
     });
     setMessages(fullChat.logs);
+    setTyping(false);
   }
 
   useEffect(() => {
@@ -74,7 +77,9 @@ export default function AIChatPage({ user }) {
     <div className="h-[100vh] mx-auto max-w-4xl w-full flex flex-col">
       <ChatTop recipient={teacher} user={user} />
       <div
-        className="flex-grow mx-4 overflow-y-auto chat-scrollbar my-28"
+        className={`flex-grow mx-4 overflow-y-auto chat-scrollbar ${
+          showForm ? "mt-28 mb-56" : "my-28"
+        }`}
         ref={chatContainerRef}
       >
         {messages.map((message, idx) =>
@@ -100,6 +105,17 @@ export default function AIChatPage({ user }) {
             </div>
           )
         )}
+        {typing && <div>
+          <div className="flex items-center justify-start">
+              <div className="h-14 w-14 overflow-hidden rounded-full">
+                <img src={teacher.image} alt="profile" />
+              </div>
+              <div className="ml-4 my-3 bg-first px-10 py-5 rounded-2xl">
+              <div class="dot-elastic"></div>
+
+              </div>
+            </div>
+        </div>}
       </div>
       <ChatBottom
         setShowForm={setShowForm}
