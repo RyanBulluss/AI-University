@@ -19,14 +19,6 @@ const teacherSchema = new Schema({
         type: String,
         required: true
     },
-    instructions: {
-        type: String,
-        required: true
-    },
-    seed: {
-        type: String,
-        required: true
-    },
 }, {
     timestamps: true
 })

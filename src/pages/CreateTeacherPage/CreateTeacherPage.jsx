@@ -9,8 +9,6 @@ export default function CreateTeacherPage() {
     image: "",
     description: "",
     subject: "",
-    instructions: "",
-    seed: "",
   });
 
 

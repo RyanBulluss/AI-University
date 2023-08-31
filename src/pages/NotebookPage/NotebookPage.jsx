@@ -36,7 +36,7 @@ export default function NotebookPage({ user }) {
   }
 
   return (
-    <div className="max-w-7xl">
+    <div className="max-w-7xl mx-auto">
       <SearchBar
         handleSubmit={handleSubmit}
         search={search}
