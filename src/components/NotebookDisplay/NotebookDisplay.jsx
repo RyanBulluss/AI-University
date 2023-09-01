@@ -27,7 +27,7 @@ export default function NotebookDisplay({
       )}
       <div className="my-5 flex flex-wrap gap-3">
         <div
-          className="bg-fourth hover:opacity-75 h-64 md:w-[200px] w-[160px] text-center text-2xl text-center rounded-xl cursor-pointer flex flex-col items-center justify-center gap-2"
+          className={`${form ? 'bg-fifth' : 'bg-fourth'} hover:opacity-75 h-64 md:w-[200px] w-[160px] text-2xl text-center rounded-xl cursor-pointer flex flex-col items-center justify-center gap-2`}
           onClick={handleNewBook}
         >
           <FaPlus className="text-4xl" />

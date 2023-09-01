@@ -27,10 +27,12 @@ export default function ProfilePic({ setUser }) {
           className="w-full px-4 py-2 mt-2 border border-fifth rounded-md bg-fourth focus:border-white focus:ring"
         />
         <div className="flex justify-between">
+          <div>
+            {success && (
+              <h4 className="px-2 py-2 my-2 text-second">Image Saved ✔️</h4>
+            )}
+          </div>
           <SubmitButton buttonText={"Submit"} />
-          {success && (
-            <h4 className="px-6 py-2 my-3 text-second">Image Saved ✔️</h4>
-          )}
         </div>
       </div>
     </form>

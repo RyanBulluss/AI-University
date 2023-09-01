@@ -4,6 +4,9 @@ import AuthPage from "../AuthPage/AuthPage";
 import TeacherIndexPage from "../TeacherIndexPage/TeaherIndexPage";
 import NotebookPage from "../NotebookPage/NotebookPage";
 import CreateTeacherPage from "../CreateTeacherPage/CreateTeacherPage";
+import StripePage from "../StripePage/StripePage"
+import SuccessPage from "../SuccessPage/SuccessPage";
+import CancelPage from "../CancelPage/CancelPage";
 import NavBar from "../../components/NavBar/NavBar";
 import Sidebar from "../../components/SideBar/SideBar";
 import { useLocation } from "react-router-dom";
@@ -19,7 +22,7 @@ export default function App() {
   const location = useLocation();
 
 
-
+  const margins = "ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8";
   
 
   const showNav = !location.pathname.includes(`/chat/`);
@@ -37,13 +40,16 @@ export default function App() {
           )}
           <div>
             <Routes>
-              <Route path="/" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><TeacherIndexPage /></div>} />
-              <Route path="/students" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><StudentIndexPage user={user} /></div>} />
-              <Route path="/notebook" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><NotebookPage user={user} /></div>} />
-              <Route path="/teacher/create" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><CreateTeacherPage /></div>} />
-              <Route path="/settings" element={<div className="ml-4 md:ml-28 mt-24 mb-8 mr-4 md:mr-8"><SettingsPage user={user} setUser={setUser} /> </div>} />
+              <Route path="/" element={<div className={margins}><TeacherIndexPage /></div>} />
+              <Route path="/students" element={<div className={margins}><StudentIndexPage user={user} /></div>} />
+              <Route path="/notebook" element={<div className={margins}><NotebookPage user={user} /></div>} />
+              <Route path="/teacher/create" element={<div className={margins}><CreateTeacherPage /></div>} />
+              <Route path="/settings" element={<div className={margins}><SettingsPage user={user} setUser={setUser} /> </div>} />
+              <Route path="/stripe" element={<div className={margins}><StripePage /> </div>} />
               <Route path="/teacher/chat/:id" element={<AIChatPage user={user} />} />
               <Route path="/student/chat/:id" element={<StudentChatPage user={user} />} />
+              <Route path="/success" element={<div className={margins}><SuccessPage /></div>} />
+              <Route path="/cancel" element={<div className={margins}><CancelPage /></div>} />
             </Routes>
           </div>
         </>

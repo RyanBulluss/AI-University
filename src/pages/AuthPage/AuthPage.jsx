@@ -12,12 +12,21 @@ export default function AuthPage({ setUser }) {
       ) : (
         <SignUpForm setUser={setUser} />
       )}
-      <button
-        className="bg-first/60 w-64 p-1 mx-auto rounded-lg"
-        onClick={() => setLogin(!login)}
-      >
-        {login ? "Sign Up" : "Log in"}
-      </button>
+      <p className="flex justify-between gap-4 p-1">
+        <button
+          className=" text-second mx-auto rounded-lg"
+          onClick={() => setLogin(!login)}
+        >
+          {login ? "Sign Up" : "Log in"}
+        </button>
+        or
+        <button
+          className=" text-second mx-auto rounded-lg"
+          onClick={() => alert('Not created yet')}
+        >
+          Demo Account
+        </button>
+      </p>
     </main>
   );
 }

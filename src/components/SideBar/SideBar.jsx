@@ -4,6 +4,11 @@ import { FaRobot , FaUserGraduate, FaBook, FaPlus, FaCog } from "react-icons/fa"
 export default function SideBar() {
   const routes = [
     {
+      name: "Premium",
+      icon: <FaRobot  className="text-3xl" />,
+      link: "/stripe",
+    },
+    {
       name: "Teachers",
       icon: <FaRobot  className="text-3xl" />,
       link: "/",
