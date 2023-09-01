@@ -16,4 +16,6 @@ router.put('/:id', teachersCtrl.update);
 
 router.post('/:id', teachersCtrl.remove);
 
+router.post('/ai', teachersCtrl.removeAI);
+
 module.exports = router;

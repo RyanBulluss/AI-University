@@ -31,16 +31,16 @@ export default function TeachersDisplay({
         <Link
           to={`/teacher/chat/${teacher._id}`}
           key={idx}
-          className="bg-fourth hover:opacity-75 w-[200px] flex flex-col justify-center items-center p-5 rounded-2xl "
+          className="bg-fourth hover:opacity-75 md:w-[200px] w-[160px] flex flex-col justify-center items-center p-5 rounded-2xl "
         >
-          <div className="rounded-2xl overflow-hidden w-40">
+          <div className="rounded-2xl overflow-hidden md:w-40 ">
             <img src={teacher.image} className="w-40" alt="teacher" />
           </div>
           
-          <h3 className="mt-2 text-lg font-semibold text-center">
+          <h3 className="mt-2 text-md md:text-lg font-semibold text-center">
             {teacher.name}
           </h3>
-          <h4 className="m-2 text-md text-gray-300 font-semibold text-center">
+          <h4 className="m-2 text-sm md:text-md text-gray-300 font-semibold text-center">
             {teacher.subject.name}
           </h4>
         </Link>

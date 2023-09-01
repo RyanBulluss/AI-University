@@ -10,6 +10,7 @@ module.exports = {
   update,
   getOne,
   getAll,
+  removeAI,
 };
 
 const openai = new OpenAI(OPENAI_API_KEY);
@@ -48,6 +49,18 @@ async function remove(req, res) {
     res.json(teacher);
   } catch (err) {
     res.status(400).json(err);
+  }
+}
+
+async function removeAI(req, res) {
+  try {
+    // Delete all documents where the aiImage key exists
+    const result = await Teacher.deleteMany({ aiImage: { $exists: true } });
+    
+    res.json(result);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while deleting documents.' });
   }
 }
 
