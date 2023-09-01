@@ -27,7 +27,7 @@ export default function TeachersDisplay({ students, searchFilter, user }) {
         <Link
           to={`/student/chat/${student._id}`}
           key={idx}
-          className={`bg-fourth w-[200px] flex flex-col justify-center items-center p-5 rounded-2xl `}
+          className={`bg-fourth hover:opacity-75 w-[200px] flex flex-col justify-center items-center p-5 rounded-2xl `}
         >
           <div className="rounded-2xl overflow-hidden w-40">
             <img src={student.image} className="w-40" alt="student" />
@@ -36,11 +36,13 @@ export default function TeachersDisplay({ students, searchFilter, user }) {
             {student.name}
           </h3>
           <h4 className="m-2 text-md font-semibold text-gray-300 text-center">
-            {student.premium ? 'Premium Account' : 'Basic account'}
+            {student.admin ? 'Admin' : student.premium ? 'Premium Account' : 'Basic account'}
           </h4>
           <h4 className="mt-2 text-sm font-semibold text-gray-300 text-center">
             {student._id === user._id ? 'Yourself' : ''}
           </h4>
+          
+          
         </Link>
       ))}
     </div>

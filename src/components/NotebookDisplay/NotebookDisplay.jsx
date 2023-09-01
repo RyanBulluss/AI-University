@@ -27,7 +27,7 @@ export default function NotebookDisplay({
       )}
       <div className="my-5 flex flex-wrap gap-3">
         <div
-          className="bg-fourth hover:bg-fifth h-64 w-[200px] text-2xl text-center rounded-xl cursor-pointer flex flex-col items-center justify-center gap-2"
+          className="bg-fourth hover:opacity-75 h-64 w-[200px] text-2xl text-center rounded-xl cursor-pointer flex flex-col items-center justify-center gap-2"
           onClick={handleNewBook}
         >
           <FaPlus className="text-4xl" />
@@ -39,7 +39,7 @@ export default function NotebookDisplay({
           <div
             onClick={() => setSelectedId(book._id)}
             key={idx}
-            className="bg-fourth hover:bg-fifth h-64 w-[200px] rounded-xl cursor-pointer flex flex-col items-center justify-center gap-2"
+            className="bg-fourth hover:opacity-75 h-64 w-[200px] rounded-xl cursor-pointer flex flex-col items-center justify-center gap-2"
           >
             <h1 className="text-6xl">{book.icon}</h1>
             <h2 className="text-2xl m-3">{book.title}</h2>

@@ -1,4 +1,7 @@
 const User = require('../../models/user');
+const UserChat = require("../../models/userChat");
+const UserMessage = require("../../models/userMessage");
+const Notebook = require("../../models/notebook");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
@@ -9,7 +12,9 @@ module.exports = {
     updateImage,
     getAll,
     getOne,
-    updateLevel
+    updateLevel,
+    toggleAdmin,
+    deleteOne
 };
 
 
@@ -55,6 +60,15 @@ async function getOne(req, res) {
     }
 }
 
+async function deleteOne(req, res) {
+    try {
+        const result = await User.deleteOne( {_id: req.params.id} );
+        res.json(result);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+}
+
 async function login(req, res) {
 
     console.log(req.body.email)  
@@ -70,9 +84,16 @@ async function login(req, res) {
     }
   }
 
+const adminMessage = "Welcome to the AI University! 🎓✨ \n We're thrilled to have you here. Whether you're a seasoned AI enthusiast or just getting started, you've joined a community of passionate learners and innovators. Our mission is to empower you with the knowledge and skills to thrive in the world of artificial intelligence. 🤖 \n Feel free to talk to wide range of advanced AI teachers, other students and don't forget to take notes! ✍️ \n I am the developer of this institute so if you have any issues or suggestions let me know here or at my email @rbulluss2000@gmail.com. \n \n Let's learn, grow, and shape the future of AI together. Enjoy your learning adventure! 🎓"
+
 async function create(req, res) {
     try {
         const user = await User.create(req.body);
+        const admin = await User.findOne({ admin: true });
+        const message = await UserMessage.create({ sender: admin._id, text: adminMessage })
+        await UserChat.create( { user1: admin._id, user2: user._id, logs: [message]} )
+        const notebook = Notebook.create({ user: user._id, title: 'General Notes', notes: [] })
+        console.log(notebook)
         const token = createJWT(user);
         res.json(token);
     } catch (err) {
@@ -93,4 +114,11 @@ function createJWT(user) {
 function checkToken(req, res) {
     console.log('req.user', req.user);
     res.json(req.exp);
+}
+
+async function toggleAdmin(req, res) {
+    const user = await User.findById(req.params.id);
+    user.admin = !user.admin;
+    const result = await user.save()
+    res.json(result);
 }

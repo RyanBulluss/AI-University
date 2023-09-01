@@ -1,4 +1,6 @@
 const Teacher = require("../../models/teacher");
+const axios = require('axios');
+const fs = require('fs');
 const OpenAI = require("openai");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
@@ -10,28 +12,29 @@ module.exports = {
   getAll,
 };
 
-const openai = new OpenAI({
-    apiKey: OPENAI_API_KEY,
-  });
+const openai = new OpenAI(OPENAI_API_KEY);
+
 
 
 async function create(req, res) {
   try {
-    let image;
-    try{
-        if (req.body.image.length < 1) {
-            image = await openai.images.generate({ prompt: `A medium range (waist and above) realistic portrait style shot of ${req.body.name} capturing their iconic look, with golden hour lighting. 4k` });
-            req.body.image = image.data[0].url;
-            console.log(image)
-        }
-    } catch (error) {
-        if (error.response) {
-          console.log(error.response.status);
-          console.log(error.response.data);
-        } else {
-          console.log(error.message);
-        }
-      }
+    // try{
+    //     if (req.body.image.length < 1) {
+    //         const reponse = await openai.images.generate({ prompt: `A medium range (waist and above) realistic portrait style shot of ${req.body.name} capturing their iconic look, with golden hour lighting. 4k` });
+    //         const imageUrl = reponse.data[0].url;
+    //         const imageResponse = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    //         const imageBuffer = Buffer.from(imageResponse.data, 'binary');
+    //         fs.writeFileSync(`${req.body.name}_pic.jpg`, imageBuffer);
+    //         req.body.aiImage = `${req.body.name}_pic.jpg`
+    //     }
+    // } catch (error) {
+    //     if (error.response) {
+    //       console.log(error.response.status);
+    //       console.log(error.response.data);
+    //     } else {
+    //       console.log(error.message);
+    //     }
+    //   }
     const teacher = await Teacher.create(req.body);
     res.json(teacher);
   } catch (err) {

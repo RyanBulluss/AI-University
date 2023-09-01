@@ -70,6 +70,7 @@ export default function TeacherForm({ subjects, formData, setFormData }) {
               <label className="text-white dark:text-gray-200 flex justify-between">
                 <span>Image</span>
                 <button
+                  required
                   onClick={showImage}
                   className="bg-first hover:bg-first/80
                 rounded-md px-2 border border-fifth"

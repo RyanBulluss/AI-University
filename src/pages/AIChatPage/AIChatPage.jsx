@@ -27,7 +27,7 @@ export default function AIChatPage({ user }) {
       top: chatContainerRef.current.scrollHeight,
       behavior: "smooth",
     });
-  }, [messages, showForm]);
+  }, [messages, showForm, typing]);
 
   async function handleSubmit(e) {
     e.preventDefault();

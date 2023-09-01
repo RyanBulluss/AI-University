@@ -10,13 +10,17 @@ router.get('/', usersCtrl.getAll);
 
 router.post('/', usersCtrl.create);
 
-router.post('/login', usersCtrl.login);
+router.post('/login', usersCtrl.login); 
+
+router.post('/:id', usersCtrl.deleteOne); 
 
 router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);
 
 router.put('/image', ensureLoggedIn, usersCtrl.updateImage);
 
 router.put('/level', ensureLoggedIn, usersCtrl.updateLevel);
+
+router.put('/admin/:id',  usersCtrl.toggleAdmin);
 
 router.get('/:id', ensureLoggedIn, usersCtrl.getOne);
 

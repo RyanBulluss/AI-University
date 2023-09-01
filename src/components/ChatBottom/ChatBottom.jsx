@@ -1,8 +1,9 @@
-import { FiSend, FiEdit, FiChevronLeft } from "react-icons/fi";
+import { FiSend, FiEdit, FiBookOpen, FiChevronLeft } from "react-icons/fi";
 import { useState, useEffect } from "react";
 import { getUserNotebooks } from "../../utilities/notebook-api";
 import SubmitButton from "../SubmitButton/SubmitButton";
 import { createNote } from "../../utilities/note-api";
+import { Link } from "react-router-dom";
 
 export default function ChatBottom({
   teacher,
@@ -20,8 +21,10 @@ export default function ChatBottom({
   useEffect(() => {
     async function getNotebooks() {
       const getNotebooks = await getUserNotebooks(user._id);
-      await setNotebooks(getNotebooks);
-      setNote({ notebookId: getNotebooks[0]._id, title: "", text: "" });
+      if (getNotebooks.length) {
+        await setNotebooks(getNotebooks);
+        setNote({ notebookId: getNotebooks[0]._id, title: "", text: "" });
+      }
     }
     getNotebooks();
   }, []);
@@ -48,50 +51,71 @@ export default function ChatBottom({
           onSubmit={handleNote}
           className="h-56 fixed bottom-0 w-full max-w-4xl bg-third border-t border-fourth flex items-center"
         >
-          <div className="w-full mx-6">
-            <div className="flex">
-              <select
-                value={note.notebookId}
+          {!!notebooks.length && (
+            <div className="w-full mx-6">
+              <div className="flex">
+                <select
+                  value={note.notebookId}
+                  onChange={handleChange}
+                  name="notebookId"
+                  className="p-2 mr-2 w-42 border border-fifth rounded-md bg-fourth focus:border-white"
+                >
+                  {notebooks.map((notebook, idx) => (
+                    <option key={idx} value={notebook._id}>
+                      {notebook.icon} {notebook.title}
+                    </option>
+                  ))}
+                </select>
+                <input
+                  maxlength={30}
+                  className="text-xl p-2 border bg-fourth border-fifth rounded-lg flex-grow"
+                  type="title"
+                  name="title"
+                  value={note.title}
+                  onChange={handleChange}
+                  placeholder="Title"
+                />
+              </div>
+              <textarea
+                value={note.text}
                 onChange={handleChange}
-                name="notebookId"
-                className="p-2 mr-2 w-42 border border-fifth rounded-md bg-fourth focus:border-white"
-              >
-                {notebooks.map((notebook, idx) => (
-                  <option key={idx} value={notebook._id}>
-                    {notebook.icon} {notebook.title}
-                  </option>
-                ))}
-              </select>
-              <input
-                className="text-xl p-2 border bg-fourth border-fifth rounded-lg flex-grow"
-                type="title"
-                name="title"
-                value={note.title}
-                onChange={handleChange}
-                placeholder="Title"
+                placeholder="Write or paste your notes here"
+                required
+                name="text"
+                className="px-4 py-2 mt-2 w-full custom-user-drag border border-fifth rounded-md bg-fourth focus:border-white"
               />
+              <div className="flex justify-between">
+                <button
+                  onClick={() => setShowForm(!showForm)}
+                  className="text-3xl"
+                >
+                  <FiChevronLeft />
+                </button>
+                {success && (
+                  <h4 className="px-6 py-2 my-3 text-second">Note Saved ✔️</h4>
+                )}
+                <SubmitButton buttonText={"Add Note"} />
+              </div>
             </div>
-            <textarea
-              value={note.text}
-              onChange={handleChange}
-              placeholder="Write or paste your notes here"
-              required
-              name="text"
-              className="px-4 py-2 mt-2 w-full custom-user-drag border border-fifth rounded-md bg-fourth focus:border-white"
-            />
-            <div className="flex justify-between">
-              <button
-                onClick={() => setShowForm(!showForm)}
-                className="text-3xl"
-              >
-                <FiChevronLeft />
-              </button>
-              {success && (
-                <h4 className="px-6 py-2 my-3 text-second">Note Saved ✔️</h4>
-              )}
-              <SubmitButton buttonText={"Add Note"} />
+          )}
+          {showForm && !notebooks.length && (
+            <div className="w-full flex flex-col items-center justify-center">
+              <h1 className="text-center font-semibold w-full text-4xl">
+                You have no notebooks!
+              </h1>
+              <div className="flex">
+                <button
+                  onClick={() => setShowForm(!showForm)}
+                  className="text-3xl float-left"
+                >
+                  <FiChevronLeft />
+                </button>
+                <Link to="/notebook" className="py-2 px-4 bg-first hover:bg-first/75 rounded-full m-3">
+                  Create Notebook
+                </Link>
+              </div>
             </div>
-          </div>
+          )}
         </form>
       )}
       {!showForm && (
@@ -103,7 +127,7 @@ export default function ChatBottom({
             onClick={() => setShowForm(!showForm)}
             className="text-3xl mx-6 cursor-pointer"
           >
-            <FiEdit />
+            <FiBookOpen />
           </a>
           <input
             required

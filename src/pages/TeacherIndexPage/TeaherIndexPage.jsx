@@ -16,6 +16,18 @@ export default function TeacherIndexPage() {
     async function allData() {
       const dbSubjects = await getAllSubjects();
       const dbTeachers = await getAllTeachers();
+      dbTeachers.forEach(teacher => {
+        if(teacher.aiImage) {
+          console.log(teacher.aiImage.data)
+          const bufferData = teacher.aiImage.data; // Array of numbers
+          const uint8Array = new Uint8Array(bufferData); // Convert to Uint8Array
+          const base64ImageData = uint8Array.reduce((data, byte) => data + String.fromCharCode(byte), ''); // Convert to Base64 string
+          const dataUrl = `data:image/jpeg;base64,${base64ImageData}`;
+          const spacedImage = dataUrl.split(',')[1]
+          teacher.aiImage = `../../../${spacedImage}`
+          console.log(teacher.aiImage)
+        }
+      })
       setSubjects(dbSubjects)
       setTeachers(dbTeachers)
     }

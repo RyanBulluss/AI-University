@@ -3,23 +3,19 @@ import SideBar from "../SideBar/SideBar"
 import { useState } from "react"
 
 
-export default function MobileSideBar() {
-    const [showBar, setShowBar] = useState(false) 
-    const [px, setPx] = useState(0);
+export default function MobileSideBar() { 
+    const [show, setShow] = useState(false);
 
     function toggleBar() {
-        setShowBar(!showBar);
-        setPx(px === 0 ? 80 : 0);
+        setShow(!show);
     }
 
     return(
-        <div>
+        <div className="md:hidden">
             <FaBars onClick={toggleBar} className="block md:hidden w-8 h-8 cursor-pointer hover:bg-fifth rounded" />
-            {showBar &&
-            <div className={`fixed transform bottom-0 top-16 pr-2 bg-third transition-transform`}>
+            <div onClick={() => setShow(false)}  className={`fixed transform ${show ? 'translate-x-0' : '-translate-x-24'} bottom-0 top-16 pr-2 bg-third transition-transform`}>
                 <SideBar />
             </div>
-            }
         </div>
     )
 }
