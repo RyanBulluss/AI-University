@@ -19,6 +19,13 @@ export async function login(userData) {
     return getUser()
 }
 
+export async function demoAccount() {
+    const token = await usersAPI.demo();
+    localStorage.setItem('token', token);
+
+    return getUser()
+}
+
 export async function premium(userData) {
     const token = await usersAPI.premiumUser(userData);
     localStorage.setItem('token', token);

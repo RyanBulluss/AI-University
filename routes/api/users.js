@@ -12,6 +12,8 @@ router.post('/', usersCtrl.create);
 
 router.post('/login', usersCtrl.login); 
 
+router.post('/demo', usersCtrl.demo);
+
 router.post('/:id', usersCtrl.deleteOne); 
 
 router.get('/check-token', ensureLoggedIn, usersCtrl.checkToken);

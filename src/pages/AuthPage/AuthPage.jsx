@@ -1,9 +1,15 @@
 import SignUpForm from "../../components/SignUpForm/SignUpForm";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { useState } from "react";
+import { demoAccount } from "../../utilities/users-service";
 
 export default function AuthPage({ setUser }) {
   const [login, setLogin] = useState(true);
+
+  async function handleDemo() {
+    const user = await demoAccount();
+    setUser(user)
+  }
 
   return (
     <main className="flex flex-col items-center justify-center">
@@ -22,7 +28,7 @@ export default function AuthPage({ setUser }) {
         or
         <button
           className=" text-second mx-auto rounded-lg"
-          onClick={() => alert('Not created yet')}
+          onClick={handleDemo}
         >
           Demo Account
         </button>

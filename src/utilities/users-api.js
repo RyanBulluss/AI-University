@@ -9,6 +9,10 @@ export async function login(userData) {
   return sendRequest(`${BASE_URL}/login`, 'POST', userData);
 }
 
+export async function demo() {
+  return sendRequest(`${BASE_URL}/demo`, 'POST', {});
+}
+
 export async function checkToken() {
   return sendRequest(`${BASE_URL}/check-token`);
 }

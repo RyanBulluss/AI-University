@@ -15,7 +15,8 @@ module.exports = {
     updateLevel,
     toggleAdmin,
     deleteOne,
-    premiumUser
+    premiumUser,
+    demo
 };
 
 
@@ -72,18 +73,28 @@ async function deleteOne(req, res) {
 
 async function login(req, res) {
 
-    console.log(req.body.email)  
     try {
       const user = await User.findOne({ email: req.body.email });
-      console.log(user)  
-      if (!user) console.log('addawsdawdfafaf');
-      const match = await bcrypt.compare(req.body.password, user.password);
-      if (!match) console.log('adasda');
+      if (!user) throw new Error();
+      const match = bcrypt.compare(req.body.password, user.password);
+      if (!match) throw new Error();
       res.json( createJWT(user) );
     } catch {
       res.status(400).json('Bad Credentials');
     }
   }
+
+async function demo(req, res) {
+    try {
+        const user = await User.findOne({ email: 'demoaccount@gmail.com' });
+        if (!user) throw new Error();
+        const match = bcrypt.compare('password123', user.password);
+        if (!match) throw new Error();
+        res.json( createJWT(user) );
+      } catch {
+        res.status(400).json('Bad Credentials');
+      }
+}
 
 const adminMessage = "Welcome to the AI University! 🎓✨ \n We're thrilled to have you here. Whether you're a seasoned AI enthusiast or just getting started, you've joined a community of passionate learners and innovators. Our mission is to empower you with the knowledge and skills to thrive in the world of artificial intelligence. 🤖 \n Feel free to talk to wide range of advanced AI teachers, other students and don't forget to take notes! ✍️ \n I am the developer of this institute so if you have any issues or suggestions let me know here or at my email @rbulluss2000@gmail.com. \n \n Let's learn, grow, and shape the future of AI together. Enjoy your learning adventure! 🎓"
 
