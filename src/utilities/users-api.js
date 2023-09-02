@@ -29,4 +29,7 @@ export async function getOneStudent(id) {
   return sendRequest(`${BASE_URL}/${id}`);
 }
 
+export async function premiumUser(userId) {
+  return sendRequest(`${BASE_URL}/premium`, 'PUT', userId);
+}
 

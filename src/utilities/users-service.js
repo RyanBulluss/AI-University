@@ -19,6 +19,27 @@ export async function login(userData) {
     return getUser()
 }
 
+export async function premium(userData) {
+    const token = await usersAPI.premiumUser(userData);
+    localStorage.setItem('token', token);
+
+    return getUser()
+}
+
+export async function userLevel(userData) {
+    const token = await usersAPI.updateLevel(userData);
+    localStorage.setItem('token', token);
+
+    return getUser()
+}
+
+export async function userImage(userData) {
+    const token = await usersAPI.updateUserImage(userData);
+    localStorage.setItem('token', token);
+
+    return getUser()
+}
+
 export function getToken() {
     const token = localStorage.getItem('token');
     if (!token) return null;

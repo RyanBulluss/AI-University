@@ -22,6 +22,8 @@ router.put('/level', ensureLoggedIn, usersCtrl.updateLevel);
 
 router.put('/admin/:id',  usersCtrl.toggleAdmin);
 
+router.put('/premium',  usersCtrl.premiumUser);
+
 router.get('/:id', ensureLoggedIn, usersCtrl.getOne);
 
 module.exports = router;

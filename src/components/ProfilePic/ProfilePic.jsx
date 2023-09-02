@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import SubmitButton from "../SubmitButton/SubmitButton";
-import { updateUserImage } from "../../utilities/users-api";
+import { userImage } from "../../utilities/users-service";
 
 export default function ProfilePic({ setUser }) {
   const [imageUrl, setImageUrl] = useState("");
@@ -9,7 +9,7 @@ export default function ProfilePic({ setUser }) {
   async function handleSubmit(e) {
     e.preventDefault();
     console.log({ imageUrl });
-    const user = await updateUserImage({ imageUrl });
+    const user = await userImage({ imageUrl });
     setUser(user);
     setSuccess(true);
     setTimeout(() => setSuccess(false), 2000);

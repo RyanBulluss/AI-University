@@ -33,6 +33,7 @@ app.use('/api/notes', require('./routes/api/notes'));
 app.use('/api/stripe', require('./routes/api/stripe'));
 
 
+
 // The following "catch all" route (note the *) is necessary
 // to return the index.html on all non-AJAX requests
 app.get('/*', function(req, res) {

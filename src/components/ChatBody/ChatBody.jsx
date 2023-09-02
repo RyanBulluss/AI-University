@@ -20,7 +20,7 @@ export default function ChatBody( {messages, user, recipient, showForm} ) {
           message.sender === user._id ? (
             <div key={idx} className="flex items-center justify-end">
               <h4>{chatTime(message.createdAt)}</h4>
-              <h3 className="bg-blue-400 w-3/5 rounded-l-2xl rounded-t-2xl p-3 m-4 text-lg md:text-xl lg:text-2xl">
+              <h3 className="bg-blue-400 w-3/5 rounded-l-2xl rounded-t-2xl p-3 mx-2 md:mx-4 my-4 text-lg md:text-xl lg:text-2xl">
                 {message.text}
               </h3>
               <div className="h-14 w-14 overflow-hidden rounded-full">
@@ -32,10 +32,10 @@ export default function ChatBody( {messages, user, recipient, showForm} ) {
               <div className="h-14 w-14 overflow-hidden rounded-full">
                 <img src={recipient.image} alt="profile" />
               </div>
-              <h3 className="bg-second/60 w-3/5 rounded-r-2xl rounded-t-2xl p-3 m-4 text-lg md:text-xl lg:text-2xl">
+              <h3 className="bg-second/60 w-3/5 rounded-r-2xl rounded-t-2xl p-3 mx-2 md:mx-4 text-lg md:text-xl lg:text-2xl">
                 {message.text}
               </h3>
-              <h4>{chatTime(message.createdAt)}</h4>
+              <h4 >{chatTime(message.createdAt)}</h4>
             </div>
           )
         )}

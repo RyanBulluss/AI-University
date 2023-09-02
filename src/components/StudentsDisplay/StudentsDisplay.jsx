@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import UserIcons from "../UserIcons/UserIcons";
 
 export default function TeachersDisplay({ students, searchFilter, user }) {
   const [filteredStudents, setFilteredStudents] = useState([]);
@@ -35,12 +36,10 @@ export default function TeachersDisplay({ students, searchFilter, user }) {
           <h3 className="mt-2 text-xl font-bold text-center">
             {student.name}
           </h3>
-          <h4 className="m-2 text-md font-semibold text-gray-300 text-center">
-            {student.admin ? 'Admin' : student.premium ? 'Premium Account' : 'Basic account'}
-          </h4>
-          <h4 className="mt-2 text-sm font-semibold text-gray-300 text-center">
-            {student._id === user._id ? 'Yourself' : ''}
-          </h4>
+          <UserIcons student={student} user={user} />
+          
+
+
           
           
         </Link>

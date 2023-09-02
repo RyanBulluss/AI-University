@@ -52,13 +52,13 @@ export default function ChatBottom({
           className="h-56 fixed bottom-0 w-full max-w-4xl bg-third border-t border-fourth flex items-center"
         >
           {!!notebooks.length && (
-            <div className="w-full mx-6">
+            <div className="w-full mr-2 ml-1 sm:mx-6">
               <div className="flex">
                 <select
                   value={note.notebookId}
                   onChange={handleChange}
                   name="notebookId"
-                  className="p-2 mr-2 w-42 border border-fifth rounded-md bg-fourth focus:border-white"
+                  className="p-2 mr-2 w-28 sm:w-40 border border-fifth rounded-md bg-fourth focus:border-white"
                 >
                   {notebooks.map((notebook, idx) => (
                     <option key={idx} value={notebook._id}>

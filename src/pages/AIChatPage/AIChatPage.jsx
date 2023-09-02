@@ -11,7 +11,7 @@ import {
 } from "../../utilities/aiChat-api";
 
 export default function AIChatPage({ user }) {
-  const [teacher, setTeacher] = useState({ name: "" });
+  const [teacher, setTeacher] = useState({ name: '' });
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [showForm, setShowForm] = useState(false);

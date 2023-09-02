@@ -34,7 +34,7 @@ export default function App() {
             <>
               <NavBar user={user} setUser={setUser} />
               <div className="hidden md:flex mt-16 w-20 flex-col fixed inset-y-0">
-                <Sidebar />
+                <Sidebar user={user} />
               </div>
             </>
           )}
@@ -48,7 +48,7 @@ export default function App() {
               <Route path="/stripe" element={<div className={margins}><StripePage /> </div>} />
               <Route path="/teacher/chat/:id" element={<AIChatPage user={user} />} />
               <Route path="/student/chat/:id" element={<StudentChatPage user={user} />} />
-              <Route path="/success" element={<div className={margins}><SuccessPage /></div>} />
+              <Route path="/success" element={<div className={margins}><SuccessPage user={user} setUser={setUser} /></div>} />
               <Route path="/cancel" element={<div className={margins}><CancelPage /></div>} />
             </Routes>
           </div>

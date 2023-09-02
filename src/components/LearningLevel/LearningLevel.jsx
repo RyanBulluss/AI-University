@@ -1,6 +1,6 @@
 import { useState } from "react";
 import SubmitButton from "../SubmitButton/SubmitButton";
-import { updateLevel } from "../../utilities/users-api";
+import { userLevel } from "../../utilities/users-service";
 
 export default function LearningLevel({ user, setUser }) {
   const [level, setLevel] = useState(user.level);
@@ -16,7 +16,7 @@ export default function LearningLevel({ user, setUser }) {
   async function handleSubmit(e) {
     e.preventDefault();
     console.log({ level });
-    const newUser = await updateLevel({ level });
+    const newUser = await userLevel({ level });
     setUser(newUser);
     setSuccess(true);
     setTimeout(() => setSuccess(false), 2000);

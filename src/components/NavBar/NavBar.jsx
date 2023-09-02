@@ -11,7 +11,7 @@ export default function NavBar({ user, setUser }) {
       style={{ userSelect: 'none' }}
     >
       <div className="flex items-center">
-        <MobileSideBar />
+        <MobileSideBar user={user} />
         <Link
           className="hidden hover:bg-fifth/30 md:block text-3xl font-bold py-2 px-4 rounded-xl"
           to="/"

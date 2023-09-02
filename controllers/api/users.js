@@ -14,7 +14,8 @@ module.exports = {
     getOne,
     updateLevel,
     toggleAdmin,
-    deleteOne
+    deleteOne,
+    premiumUser
 };
 
 
@@ -22,8 +23,9 @@ async function updateImage(req, res) {
     try {
         await User.updateOne({ _id: req.user._id }, { image: req.body.imageUrl });
         const user = await User.findOne({ _id: req.user._id });
-        console.log(req.body.imageUrl)
-        res.json(user);
+        
+
+        res.json( createJWT(user) );
     } catch {
         res.status(400).json('Bad Image');
     }
@@ -34,8 +36,7 @@ async function updateLevel(req, res) {
     try {
         await User.updateOne({ _id: req.user._id }, { level: req.body.level });
         const user = await User.findOne({ _id: req.user._id });
-        console.log(req.body.level)
-        res.json(user);
+        res.json( createJWT(user) );
     } catch {
         res.status(400).json('Bad Request');
     }
@@ -75,9 +76,9 @@ async function login(req, res) {
     try {
       const user = await User.findOne({ email: req.body.email });
       console.log(user)  
-      if (!user) throw new Error();
+      if (!user) console.log('addawsdawdfafaf');
       const match = await bcrypt.compare(req.body.password, user.password);
-      if (!match) throw new Error();
+      if (!match) console.log('adasda');
       res.json( createJWT(user) );
     } catch {
       res.status(400).json('Bad Credentials');
@@ -121,4 +122,16 @@ async function toggleAdmin(req, res) {
     user.admin = !user.admin;
     const result = await user.save()
     res.json(result);
+}
+
+async function premiumUser(req, res) {
+    try {
+        const user = await User.findById(req.user._id);
+        user.premium = true;
+        await user.save();
+        console.log(user)
+        res.json( createJWT(user) );
+    } catch (e) {
+        res.status(400).json(err);
+    }
 }

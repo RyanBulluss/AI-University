@@ -15,7 +15,7 @@ export default function NoteView({ user, note, page, book, setNotebooks }) {
       <div>
         <h3 className="text-3xl font-semibold">{note.title}</h3>
         <p className="my-3 text-xl">{note.text}</p>
-        <p className="text-gray-300">From: {note.credit}</p>
+        <p className="text-gray-300">By: {note.credit}</p>
       </div>
       <div className="flex flex-col justify-between items-end">
         <p>{page}</p>

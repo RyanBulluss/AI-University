@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { FiChevronLeft, FiMoreVertical  } from "react-icons/fi";
+import UserIcons from "../UserIcons/UserIcons";
 
 export default function ChatTop( {recipient, user} ) {
   return (
@@ -13,7 +14,7 @@ export default function ChatTop( {recipient, user} ) {
         </div>
         <div className="flex flex-col justify-center mx-4">
           <h3 className="text-lg font-semibold">{recipient.name}</h3>
-          <h4 className="text-sm text-gray-400">{recipient.seed ? '' : user._id === recipient._id ? 'Yourself' : 'Student'}</h4>
+          {!recipient.description ? <UserIcons user={user} student={recipient} /> : ''}
           <h4 className="text-sm text-gray-400">{recipient.description}</h4>
         </div>
       </div>

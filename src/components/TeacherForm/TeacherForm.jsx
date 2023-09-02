@@ -40,7 +40,7 @@ export default function TeacherForm({ subjects, formData, setFormData }) {
 
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="rounded-2xl overflow-hidden w-40 mt-5">
+      <div className="rounded-2xl overflow-hidden w-40 mt-3 sm:mt-10">
         <img
           src={
             displayImage ||
@@ -49,7 +49,7 @@ export default function TeacherForm({ subjects, formData, setFormData }) {
           alt="teacher"
         />
       </div>
-      <section className="p-2 mx-auto w-full rounded-md mt-20">
+      <section className="p-2 mx-auto w-full rounded-md mt-12 sm:mt-20">
         <h1 className="text-xl font-bold text-white capitalize dark:text-white">
           Teacher Details
         </h1>
@@ -79,7 +79,6 @@ export default function TeacherForm({ subjects, formData, setFormData }) {
                 </button>
               </label>
               <input
-                placeholder="Optional"
                 name="image"
                 onChange={(e) => handleChange(e, "image")}
                 value={formData.image}

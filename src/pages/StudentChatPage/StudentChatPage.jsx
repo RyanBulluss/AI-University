@@ -7,7 +7,7 @@ import { sendMessage, getMessages } from "../../utilities/userChat-api";
 import ChatBody from "../../components/ChatBody/ChatBody";
 
 export default function StudentChatPage({ user }) {
-  const [student, setStudent] = useState({ name: "" });
+  const [student, setStudent] = useState({ name: '' });
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [showForm, setShowForm] = useState(false);
