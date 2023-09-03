@@ -13,3 +13,11 @@ export async function deleteNotebook(id) {
   return sendRequest(`${BASE_URL}/${id}`, 'POST');
 }
 
+export async function fillLibrary() {
+  return sendRequest(`${BASE_URL}/library`);
+}
+
+export async function publish(id) {
+  console.log(id)
+  return sendRequest(`${BASE_URL}/publish/${id}`, 'POST');
+}

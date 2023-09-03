@@ -15,7 +15,7 @@ const NotebookSchema = new Schema({
         enum: ['📘', '📗', '📙', '📕', '📒', '🔢', '🗺️', '🧪', '👨‍🍳', '🧠', '👩‍🔬', '👨‍💻', '⚽', '🎨'],
         default: '📘',
     },
-    favorite: {
+    published: {
         type: Boolean,
         default: false,
     },

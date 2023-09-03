@@ -44,6 +44,7 @@ export default function NotebookDisplay({
             <h1 className="text-6xl">{book.icon}</h1>
             <h2 className="text-2xl m-3">{book.title}</h2>
             <h3 className="text-gray-300">Pages: {book.notes.length}</h3>
+            {book.published && <h3 className="text-gray-300">Published ✔️</h3>}
           </div>
         ))}
       </div>

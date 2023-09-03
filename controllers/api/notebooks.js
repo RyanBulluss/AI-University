@@ -11,7 +11,7 @@ async function createNotebook(req, res) {
         const notebook = await Notebook.create({ user: req.user._id, title: title, icon: icon, notes: [] })
         res.json(notebook);
     } catch (e) {
-        res.status(400).json(err);
+        res.status(400).json(e);
     }
 }
 
@@ -21,7 +21,7 @@ async function getBooksByUser(req, res) {
         const notebooks = await Notebook.find({ user: req.params.id }).populate('notes')
         res.json(notebooks);
     } catch (e) {
-        res.status(400).json(err);
+        res.status(400).json(e);
     }
 }
 
@@ -30,7 +30,7 @@ async function getBooksById(req, res) {
         const notebooks = await Notebook.findById( req.params.id )
         res.json(notebooks);
     } catch (e) {
-        res.status(400).json(err);
+        res.status(400).json(e);
     }
 }
 
@@ -41,11 +41,43 @@ async function deleteBookById(req, res) {
         const result = await Notebook.deleteOne({ _id: req.params.id })
         res.json(result);
     } catch (e) {
-        res.status(400).json(err);
+        res.status(400).json(e);
     }
 }
 
+async function getLibrary(req, res) {
+    try {
+        console.log(1)
+        const books = await Notebook.find({ published: true })
+        .populate('user')
+        .populate('notes');
 
+        res.json(books)
+    } catch (e) {
+        res.status(400).json(e);
+    }
+}
+
+async function getAllBooks(req, res) {
+    try {
+        const books = await Notebook.find({})
+
+        res.json(books)
+    } catch (e) {
+        res.status(400).json(e);
+    }
+}
+
+async function publish(req, res) {
+    console.log(req.params)
+    try {
+        const result = await Notebook.updateOne({ _id: req.params.id }, { published: true })
+        const books = await Notebook.find({ user: req.user._id }).populate('notes')
+        res.json(books)
+    } catch (e) {
+        res.status(400).json(e);
+    }
+}
 
 
 module.exports = {
@@ -53,5 +85,8 @@ module.exports = {
     getBooksByUser,
     deleteBookById,
     getBooksById,
+    getLibrary,
+    getAllBooks,
+    publish
 };
   

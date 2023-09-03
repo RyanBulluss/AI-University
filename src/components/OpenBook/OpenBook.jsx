@@ -1,14 +1,25 @@
 import NoteView from "../NoteView/NoteView";
 import { useState } from "react";
 import { FiChevronLeft } from "react-icons/fi";
-import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
+import { FaPlus, FaMinus, FaTrash, FaPaperPlane  } from "react-icons/fa";
 import NoteForm from "../NoteForm/NoteForm";
-import { deleteNotebook } from "../../utilities/notebook-api";
-import { getUserNotebooks } from "../../utilities/notebook-api";
+import { deleteNotebook, getUserNotebooks, publish } from "../../utilities/notebook-api";
+import Spinner from "../Spinner/Spinner";
 
 export default function OpenBook({ user, book, setSelectedId, subjects, notebooks, setNotebooks }) {
   const [form, setForm] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [complete, setComplete] = useState(false);
 
+  async function handlePublish() {
+    setLoading(true);
+    const res = await publish(book._id);
+    console.log(res)
+    setNotebooks(res);
+    setLoading(false);
+    setComplete(true);
+    setTimeout(() => setComplete(false), 2000);
+  }
 
   async function deleteBook() {
     const complete = await deleteNotebook(book._id);
@@ -27,9 +38,13 @@ export default function OpenBook({ user, book, setSelectedId, subjects, notebook
         <h1 className="text-4xl text-center font-bold">
           {book.title} {book.icon}
         </h1>
-        <div className="text-3xl m-4 flex gap-2 cursor-pointer">
+        <div className="text-3xl m-4 flex items-center gap-2 cursor-pointer">
+
           {form && <FaMinus onClick={() => setForm(!form)} />}
           {!form && <FaPlus onClick={() => setForm(!form)} />}
+          {loading && <Spinner />  }
+          {complete && '✔️'  }
+          {!book.published && !loading && <FaPaperPlane onClick={handlePublish} />}
           <FaTrash onClick={deleteBook} />
         </div>
       </div>

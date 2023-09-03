@@ -4,6 +4,7 @@ import AuthPage from "../AuthPage/AuthPage";
 import TeacherIndexPage from "../TeacherIndexPage/TeaherIndexPage";
 import NotebookPage from "../NotebookPage/NotebookPage";
 import CreateTeacherPage from "../CreateTeacherPage/CreateTeacherPage";
+import LibraryPage from "../LibraryPage/LibraryPage";
 import StripePage from "../StripePage/StripePage"
 import SuccessPage from "../SuccessPage/SuccessPage";
 import CancelPage from "../CancelPage/CancelPage";
@@ -44,6 +45,7 @@ export default function App() {
               <Route path="/students" element={<div className={margins}><StudentIndexPage user={user} /></div>} />
               <Route path="/notebook" element={<div className={margins}><NotebookPage user={user} /></div>} />
               <Route path="/teacher/create" element={<div className={margins}><CreateTeacherPage /></div>} />
+              <Route path="/library" element={<div className={margins}><LibraryPage /></div>} />
               <Route path="/settings" element={<div className={margins}><SettingsPage user={user} setUser={setUser} /> </div>} />
               <Route path="/stripe" element={<div className={margins}><StripePage /> </div>} />
               <Route path="/teacher/chat/:id" element={<AIChatPage user={user} />} />
