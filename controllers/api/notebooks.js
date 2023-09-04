@@ -71,7 +71,9 @@ async function getAllBooks(req, res) {
 async function publish(req, res) {
     console.log(req.params)
     try {
-        const result = await Notebook.updateOne({ _id: req.params.id }, { published: true })
+        const book = await Notebook.findById(req.params.id);
+        book.published = !book.published;
+        await book.save()
         const books = await Notebook.find({ user: req.user._id }).populate('notes')
         res.json(books)
     } catch (e) {

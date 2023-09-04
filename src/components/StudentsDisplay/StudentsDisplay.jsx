@@ -23,25 +23,18 @@ export default function TeachersDisplay({ students, searchFilter, user }) {
   }, [searchFilter]);
 
   return (
-    <div className="flex flex-wrap gap-3 mt-5">
+    <div className="my-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
       {filteredStudents.map((student, idx) => (
         <Link
           to={`/student/chat/${student._id}`}
           key={idx}
-          className={`bg-fourth hover:opacity-75 md:w-[200px] w-[160px] flex flex-col justify-center items-center p-5 rounded-2xl `}
+          className={`bg-fourth hover:opacity-75 flex flex-col justify-center items-center p-5 rounded-2xl `}
         >
-          <div className="rounded-2xl overflow-hidden md:w-40">
-            <img src={student.image} className="w-40" alt="student" />
+          <div className="rounded-2xl overflow-hidden">
+            <img src={student.image} className="" alt="student" />
           </div>
-          <h3 className="mt-2 text-xl font-bold text-center">
-            {student.name}
-          </h3>
+          <h3 className="mt-2 text-xl font-bold text-center">{student.name}</h3>
           <UserIcons student={student} user={user} />
-          
-
-
-          
-          
         </Link>
       ))}
     </div>

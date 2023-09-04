@@ -26,15 +26,15 @@ export default function TeachersDisplay({
   }, [filter, teachers]);
 
   return (
-    <div className="flex flex-wrap gap-3 mt-3">
+    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-8 gap-4">
       {filteredTeachers.map((teacher, idx) => (
         <Link
           to={`/teacher/chat/${teacher._id}`}
           key={idx}
-          className="bg-fourth hover:opacity-75 md:w-[200px] w-[160px] flex flex-col justify-center items-center p-5 rounded-2xl "
+          className="bg-fourth hover:opacity-75 flex flex-col justify-center items-center p-5 rounded-2xl "
         >
-          <div className="rounded-2xl overflow-hidden md:w-40 ">
-            <img src={teacher.image} className="w-40" alt="teacher" />
+          <div className="rounded-2xl overflow-hidden  ">
+            <img src={teacher.image} className="" alt="teacher" />
           </div>
           
           <h3 className="mt-2 text-md md:text-lg font-semibold text-center">

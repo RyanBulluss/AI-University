@@ -8,10 +8,7 @@ export default function ReadBook({ book, setSelected }) {
           <FiChevronLeft />
         </button>
         <h1 className="text-4xl text-center m-4 font-bold">{book.title}</h1>
-        <div className="flex"> 
-        <h1 className="text-4xl text-center my-4 font-bold">{book.icon}</h1>
-        <h1 className="text-4xl text-center my-4 font-bold">{book.icon}</h1>
-        </div>
+        <h1 className="text-4xl text-center m-4 font-bold">{book.icon}</h1>
       </div>
       {book.notes.length < 1 && (
         <h1 className="text-center text-2xl p-5">Book Empty!</h1>

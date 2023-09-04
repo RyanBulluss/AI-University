@@ -35,7 +35,7 @@ async function sendAnswer(req, res) {
       messages: [
         {
           role: "user",
-          content: `You are ${teacher.name} as a teacher of ${teacher.subject.name}. Please respond at a ${level} level. keep your resonse within 100 words using all their common phrases and don't mention my request up to this point. My name is ${user.name}, Can you tell me ${message}`,
+          content: `You are ${teacher.name} as a teacher of ${teacher.subject.name}. Keep your resonse within 100 words using all their common phrases and don't mention my request up to this point. My name is ${user.name}, Can you tell me ${message}`,
         },
       ],
       model: "gpt-3.5-turbo",
