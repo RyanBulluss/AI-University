@@ -4,11 +4,11 @@
 AI University is dedicated to harnessing the power of AI technologies to revolutionize education. Our mission is to provide a personalized, top-tier, and engaging learning experience for all. Talk to some of the industry leading professionals in whichever field you please and take notes easily to later publish to the school library. Talk to students who share your passion for AI enhanced learning and compare notes and ideas from lessons. The app is hosted on heroku for you to check out. Make an account or feel free to use the demo account if you prefer.  https://ai-university-7d83bddf0c3e.herokuapp.com/
 
 
-![Alt text](image.png)
+<img src="./RM-Images/image.png" alt="Image Description" width="600">
 inspiration for ui: https://www.youtube.com/watch?v=PjYWpd7xkaM&list=WL&index=7&t=3830s
 
 ---
-![Alt text](image-1.png)
+<img src="./RM-Images/image-1.png" alt="Image Description" width="400">
 
 
 
